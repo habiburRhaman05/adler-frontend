@@ -30,7 +30,7 @@ export function OverviewPage() {
   const missing = notSubmitted.map((id) => employees.find((e) => e.id === id)!).filter(Boolean);
 
   return (
-    <div className="p-4 md:p-8 space-y-8 max-w-[1400px]">
+    <div className="p-4 md:p-8 space-y-8  max-w-[1600px]">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-widest text-slate-500 font-semibold">Overview</p>

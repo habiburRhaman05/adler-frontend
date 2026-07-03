@@ -37,7 +37,7 @@ export function CategoriesPage() {
   };
 
   return (
-    <div className="p-4 md:p-8 space-y-6 max-w-[1200px]">
+    <div className="p-4 md:p-8 space-y-6  max-w-[1600px]">
       <header>
         <p className="text-xs uppercase tracking-widest text-slate-500 font-semibold">Categories of work</p>
         <h1 className="text-3xl md:text-4xl font-bold mt-1 text-slate-900 tracking-tight">Categories</h1>
