@@ -10,8 +10,8 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import { useDeleteCategory } from "@/hooks/use-categories";
-import type { Category } from "@/api/category.service";
+import { useDeleteCategory } from "../hooks/use-categories";
+import type { Category } from "../api/category.service";
 
 interface DeleteCategoryDialogProps {
   category: Category | null;

@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
-import { useUpdateCategory } from "@/hooks/use-categories";
-import { getCategoryIcon, getCategoryIconGradient } from "@/components/categories/category-visuals";
-import type { Category } from "@/services/category.service";
+import { useUpdateCategory } from "../hooks/use-categories";
+import { getCategoryIcon, getCategoryIconGradient } from "./category-visuals";
+import type { Category } from "../api/category.service";
 
 interface CategoryItemProps {
   category: Category;

@@ -13,7 +13,7 @@ import {
 import { usePlan, useChangePlanStatus, useDeletePlan } from "@/features/plans/hooks/use-plans";
 import { useEmployees } from "@/features/employees/hooks/use-employees";
 import { initials, formatDate } from "@/lib/utils";
-import { useCategories } from "@/hooks/use-categories";
+import { useCategories } from "@/features/categories/hooks/use-categories";
 
 const STATUS_META: Record<string, { label: string; cls: string }> = {
   draft: { label: "Draft", cls: "bg-slate-100 text-slate-600 border-slate-200" },

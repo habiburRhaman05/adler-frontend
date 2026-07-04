@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 
-import { useCategories } from "@/hooks/use-categories";
+import { useCategories } from "@/features/categories/hooks/use-categories";
 import { useEmployees } from "@/features/employees/hooks/use-employees";
 import type { Category } from "@/lib/mock-data";
-import { AddCategoryDialog, CategoriesList, CategoryHeader, DeleteCategoryDialog, EditCategoryDialog } from "@/components/categories/index";
+import { AddCategoryDialog, CategoriesList, CategoryHeader, DeleteCategoryDialog, EditCategoryDialog } from "@/features/categories/components/index";
 
 
 

@@ -1,9 +1,6 @@
 
 
 
-export { CategoriesPage } from '@/pages/categories-page';
-
-
 export { CategoryHeader } from './category-header';
 export { CategoriesList } from './categories-list';
 export { CategoryItem } from './category-item';
@@ -19,8 +16,7 @@ export {
   useUpdateCategory,
   useDeleteCategory,
   categoryKeys,
-} from '@/hooks/use-categories';
-
+} from '../hooks/use-categories';
 
 export {
   getCategoryIcon,
@@ -29,6 +25,4 @@ export {
   CATEGORY_ICON_GRADIENTS,
   DEFAULT_CATEGORY_ICON,
   DEFAULT_CATEGORY_ICON_GRADIENT,
-} from '@/components/categories/category-visuals';
-
-
+} from './category-visuals';

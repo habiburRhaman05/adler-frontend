@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { DEPARTMENTS, EMPLOYEE_STATUSES } from '@/lib/employee-utilits';
+import { DEPARTMENTS, EMPLOYEE_STATUSES } from '@/lib/employee-utilities';
 
 interface EmployeeFiltersProps {
   searchQuery: string;

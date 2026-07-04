@@ -29,7 +29,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { initials } from '@/lib/utils';
-import type { Employee } from '@/services/emplloye.service';
+import type { Employee } from '@/features/employees/api/employee.service';
 
 // ─────────────────────────────────────────────────────────────
 // THEME CONFIGURATION

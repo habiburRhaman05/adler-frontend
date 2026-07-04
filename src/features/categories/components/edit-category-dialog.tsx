@@ -12,8 +12,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { useUpdateCategory } from "@/hooks/use-categories";
-import type { Category, CategoryInput } from "@/services/category.service";
+import { useUpdateCategory } from "../hooks/use-categories";
+import type { Category, CategoryInput } from "../api/category.service";
 
 interface EditCategoryDialogProps {
  

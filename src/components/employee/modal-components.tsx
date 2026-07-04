@@ -40,11 +40,11 @@ import {
   type EmployeeInput,
   EMPLOYMENT_TYPES,
   EMPLOYEE_STATUSES,
-} from '@/services/emplloye.service';
+} from '@/features/employees/api/employee.service';
 import {
   validateEmployeeForm,
   DEPARTMENTS,
-} from '@/lib/employee-utilits';
+} from '@/lib/employee-utilities';
 
 // ─────────────────────────────────────────────────────────────
 // DEFAULT FORM VALUES

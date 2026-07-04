@@ -14,7 +14,7 @@ import { apiClient } from "@/lib/api-client";
 import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { useEmployees } from "@/features/employees/hooks/use-employees";
-import { useCategories } from "@/hooks/use-categories";
+import { useCategories } from "@/features/categories/hooks/use-categories";
 import { initials, exportToCsv } from "@/lib/utils";
 import { buildQuery, type ListResponse } from "@/types";
 

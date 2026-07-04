@@ -13,7 +13,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { useEmployees } from "@/features/employees/hooks/use-employees";
-import { useCategories } from "@/hooks/use-categories";
+import { useCategories } from "@/features/categories/hooks/use-categories";
 import { useCreatePlan } from "@/features/plans/hooks/use-plans";
 import type { Assignment, ManpowerNeed, PlanInput } from "@/features/plans/api/plan.service";
 import { computeHours, initials } from "@/lib/utils";

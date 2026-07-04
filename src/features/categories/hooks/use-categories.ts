@@ -4,7 +4,7 @@ import {
   categoryService,
   type CategoryFilters,
   type CategoryInput,
-} from '../services/category.service';
+} from '../api/category.service';
 
 export const categoryKeys = {
   all: ['categories'] as const,

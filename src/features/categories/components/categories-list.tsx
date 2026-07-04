@@ -1,5 +1,5 @@
 import { AlertTriangle } from "lucide-react";
-import type { Category } from "@/api/category.service";
+import type { Category } from "../api/category.service";
 import { CategoryItem } from "./category-item";
 import { CategoryCardSkeleton } from "./category-card-skeleton";
 import { CategoryEmptyState } from "./category-empty-state";

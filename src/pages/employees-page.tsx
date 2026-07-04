@@ -18,8 +18,8 @@ import {
   useDeleteEmployee,
   useUpdateEmployeeStatus,
   useMutatingIds,
-} from '@/hooks/use-employee';
-import type { Employee, EmployeeInput } from '@/services/emplloye.service';
+} from '@/features/employees/hooks/use-employees';
+import type { Employee, EmployeeInput } from '@/features/employees/api/employee.service';
 import { useDebouncedValue } from '@/components/employee';
 import { EmployeeDeleteConfirm, EmployeeFormModal } from '@/components/employee/modal-components';
 import { EmployeeHeader } from '@/components/employee/employee-header-component';

@@ -1,0 +1,629 @@
+# 🎯 IMPLEMENTATION PROMPT FOR ADLER-FRONTEND RESTRUCTURING
+
+## Use This Prompt with Claude or Any AI Assistant
+
+Copy and paste the relevant phase prompt to get AI assistance for implementation.
+
+---
+
+## PHASE 1 PROMPT: Foundation & Infrastructure
+
+```
+I'm restructuring my React + TypeScript + Vite application (adler-frontend) for production-level standards. 
+
+My current app structure is not scalable and needs reorganization.
+
+Task: Help me set up the foundation for a production-grade application.
+
+Specific requirements:
+1. Create TypeScript path alias configuration for all folders (@config, @services, @utils, etc.)
+2. Setup environment variable management system with validation
+3. Create comprehensive types/interfaces file structure
+4. Setup error handling and API client foundation
+5. Configure Vite with proper aliases and optimization
+6. Setup .env files for different environments (development, production, test)
+
+Deliverables needed:
+- tsconfig.json path aliases configuration
+- vite.config.ts with all aliases and optimizations
+- src/config/env.ts file with environment variable validation
+- src/types/common.types.ts with all essential types
+- .env.example with all required environment variables
+- Step-by-step guide for applying these changes
+
+Constraints:
+- Must work with existing React + TypeScript + Vite setup
+- No breaking changes to current functionality
+- Maintain all existing code and features
+- Use TypeScript strict mode
+
+Please provide:
+1. All configuration files with explanations
+2. Copy-paste ready code
+3. Instructions for implementation
+4. Common issues and solutions
+```
+
+---
+
+## PHASE 2 PROMPT: Core Services & Utilities
+
+```
+I'm restructuring my React app to production standards. I've completed Phase 1 (foundation).
+
+Current status: Path aliases and environment configuration are set up.
+
+Task: Help me create core services and utility layer.
+
+Specific requirements:
+1. Setup Axios API client with interceptors for:
+   - Authentication token injection
+   - Request/response logging
+   - Error handling
+   - Token refresh on 401
+2. Create Authentication Service with:
+   - Login/Logout methods
+   - Token management
+   - User session handling
+3. Create Logger Service with:
+   - Multiple log levels (debug, info, warn, error)
+   - Development/production specific logging
+   - Structured logging format
+4. Create Utility functions for:
+   - String manipulation (capitalize, slugify, truncate)
+   - Date operations (formatting, comparisons)
+   - Array operations (unique, flatten, groupBy)
+   - Object utilities
+5. Create validation service for input validation
+
+Deliverables needed:
+- src/services/api/client.ts - Axios client setup
+- src/services/api/interceptors.ts - Request/response interceptors
+- src/services/api/error-handler.ts - Error handling
+- src/services/auth/authService.ts - Authentication logic
+- src/services/logging/logger.ts - Logging service
+- src/utils/[type].utils.ts - All utility functions
+- Comprehensive documentation for each service
+- Example usage for each service
+
+Constraints:
+- Zero external authentication libraries (manual implementation)
+- No existing code should break
+- All services should be typed with TypeScript
+- Services should be singleton pattern
+- Should support both async and sync operations
+
+Please provide:
+1. Complete service files with TypeScript types
+2. Integration examples
+3. Testing strategies for each service
+4. Error scenarios and handling
+```
+
+---
+
+## PHASE 3 PROMPT: Component Migration & Organization
+
+```
+I'm restructuring my React app. I've completed Phase 1 & 2 (foundation and services).
+
+Current status: Core services are set up and working.
+
+Task: Help me reorganize and standardize all components.
+
+I have existing components that need to be reorganized into a scalable structure.
+
+Specific requirements:
+1. Create component structure template:
+   - Component.tsx (main component)
+   - Component.types.ts (TypeScript interfaces)
+   - Component.module.css (scoped styles)
+   - Component.test.tsx (unit tests)
+   - index.ts (barrel export)
+
+2. Organize components into:
+   - Common components (reusable UI: Button, Modal, Input, etc.)
+   - Feature components (domain-specific features)
+
+3. Create reusable UI components library:
+   - Button with variants (primary, secondary, danger)
+   - Modal with customizable content
+   - Input with validation
+   - Card, Badge, Alert components
+   - ErrorBoundary for error handling
+   - ProtectedRoute for route protection
+
+4. Create feature-based structure:
+   - Each feature has: components/, hooks/, services/, types/, styles/
+   - Feature isolation with clear boundaries
+   - Shared code in common/
+
+5. Setup component composition patterns:
+   - Container/Presentational pattern
+   - Custom hooks for feature logic
+   - Props interface for each component
+
+Deliverables needed:
+- Complete common components library (Button, Modal, Input, Card, etc.)
+- ErrorBoundary component
+- ProtectedRoute component
+- Feature structure template
+- Component best practices guide
+- Storybook integration (optional)
+- Example: Auth feature structure with all components
+
+Constraints:
+- All existing components must be migrated without feature loss
+- Must maintain current styling approach
+- Full TypeScript typing required
+- CSS Modules for scoped styling
+- Component composition must be easy and intuitive
+
+Please provide:
+1. All component templates with full implementations
+2. CSS Module examples
+3. TypeScript types for each component
+4. Migration guide for existing components
+5. Component composition patterns and examples
+6. Testing examples for components
+```
+
+---
+
+## PHASE 4 PROMPT: State Management Setup
+
+```
+I'm restructuring my React app. I've completed Phase 1, 2 & 3 (foundation, services, components).
+
+Current status: Components are organized, services are working.
+
+Task: Help me setup centralized state management.
+
+Specific requirements:
+1. Setup Redux Toolkit with proper structure:
+   - store.ts - Redux store configuration
+   - slices/ - Feature slices for: auth, user, ui, etc.
+   - selectors - Memoized selectors for each slice
+   - thunks - Async thunk middleware
+
+2. Create Auth Slice with:
+   - State: isAuthenticated, user, token, status, error
+   - Actions: setAuthUser, setToken, clearAuth, setLoading, setError
+   - Selectors: selectIsAuthenticated, selectUser, selectToken
+   - Thunks: loginUser, logoutUser, refreshToken, registerUser
+
+3. Create User Slice with:
+   - State: users list, current user, loading, error
+   - Actions: setUsers, setCurrentUser, updateUser
+   - Selectors for accessing user data
+
+4. Create UI Slice for application state:
+   - Theme (dark/light)
+   - Modals state
+   - Notifications
+   - Sidebar toggle
+
+5. Async operations handling:
+   - Loading states
+   - Error states
+   - Success states
+   - Request cancellation
+
+6. Middleware setup:
+   - Persist auth token to localStorage
+   - Log all actions in development
+   - Handle API calls
+
+Deliverables needed:
+- src/store/store.ts - Complete store configuration
+- src/store/slices/authSlice.ts with actions, reducers, thunks
+- src/store/slices/authSelectors.ts with all selectors
+- src/store/slices/userSlice.ts with complete implementation
+- src/store/slices/uiSlice.ts for UI state
+- React hooks for accessing store (useAppDispatch, useAppSelector)
+- Integration with existing services
+- Migration guide for current state management
+
+Constraints:
+- Must work with Redux Toolkit (modern Redux)
+- All state must be properly typed
+- No state mutation (Redux is immutable)
+- Selectors must be memoized
+- API calls should go through services layer
+- Persist auth state to localStorage
+
+Please provide:
+1. Complete Redux setup with explanations
+2. All slice implementations
+3. Custom hooks for using Redux
+4. Thunks for async operations
+5. Middleware configuration
+6. Testing examples for Redux code
+7. Integration examples with components
+8. DevTools integration for debugging
+```
+
+---
+
+## PHASE 5 PROMPT: Routing & Page Setup
+
+```
+I'm restructuring my React app. I've completed Phase 1-4 (foundation, services, components, state).
+
+Current status: Redux store is set up and working.
+
+Task: Help me setup professional routing and page structure.
+
+Specific requirements:
+1. Setup React Router v6 with:
+   - Route configuration file (declarative routes)
+   - Protected routes for authenticated pages
+   - Public routes for public pages
+   - Admin routes for admin-only pages
+   - Error/fallback routes
+
+2. Create route structure:
+   - routes.ts - All route definitions
+   - protected.routes.ts - Routes requiring authentication
+   - public.routes.ts - Public accessible routes
+   - admin.routes.ts - Admin-only routes
+   - router.tsx - Router setup with layout
+
+3. Create page components:
+   - HomePage
+   - DashboardPage
+   - ProfilePage
+   - SettingsPage
+   - NotFoundPage
+   - ErrorPage
+   - LoginPage (if not in features)
+
+4. Create layouts:
+   - MainLayout (header, sidebar, footer)
+   - AuthLayout (login/register layout)
+   - AdminLayout (admin dashboard layout)
+
+5. Implement route protection:
+   - ProtectedRoute component checking authentication
+   - Role-based access control (optional)
+   - Redirect to login if not authenticated
+   - Remember previous location
+
+6. Navigation:
+   - Navigation bar with links
+   - Breadcrumbs for navigation
+   - Active route highlighting
+   - Nested routes support
+
+7. Error handling:
+   - 404 page for undefined routes
+   - Error boundaries at route level
+   - Error page for crashes
+
+Deliverables needed:
+- src/routes/routes.ts - All route definitions
+- src/routes/protected.routes.ts - Protected routes
+- src/routes/router.tsx - Router configuration
+- src/components/common/ProtectedRoute/ProtectedRoute.tsx
+- src/layouts/MainLayout.tsx, AuthLayout.tsx, AdminLayout.tsx
+- src/pages/ - All page components
+- src/components/common/NavBar.tsx with route navigation
+- Route configuration examples with all features
+- Protected route implementation example
+
+Constraints:
+- Must use React Router v6
+- All routes must have TypeScript types
+- Must integrate with Redux auth state
+- Error handling for missing routes
+- Support for nested routes
+- Preserve all existing pages/features
+
+Please provide:
+1. Complete route configuration setup
+2. Router component implementation
+3. Protected route logic
+4. Layout components
+5. Page component structure
+6. Navigation integration
+7. Error handling pages
+8. Route parameter handling examples
+9. Programmatic navigation examples
+```
+
+---
+
+## PHASE 6 PROMPT: Testing Setup & Infrastructure
+
+```
+I'm restructuring my React app. I've completed Phase 1-5 (foundation through routing).
+
+Current status: Routing and pages are set up.
+
+Task: Help me setup comprehensive testing infrastructure.
+
+Specific requirements:
+1. Setup Vitest with:
+   - Configuration file (vitest.config.ts)
+   - Test environment (jsdom for React)
+   - Coverage reporting
+   - Watch mode
+   - UI dashboard
+
+2. Testing libraries:
+   - @testing-library/react for component testing
+   - @testing-library/jest-dom for matchers
+   - Vitest for test runner
+   - Mock utilities
+
+3. Create test structure:
+   - tests/unit/ - Unit tests for functions/hooks
+   - tests/integration/ - Integration tests
+   - tests/e2e/ - End-to-end tests
+   - tests/setup.ts - Test configuration
+   - tests/mocks/ - Mock data and API
+
+4. Testing examples for:
+   - Utility functions (string, date, array utils)
+   - Custom hooks (useAuth, useFetch, etc.)
+   - Components (Button, Modal, Form)
+   - Services (API calls, auth service)
+   - Redux slices (actions, reducers, selectors)
+   - Routes and navigation
+
+5. Mocking strategies:
+   - Mock API responses
+   - Mock localStorage
+   - Mock Redux store
+   - Mock React Router
+   - Mock child components
+
+6. Testing patterns:
+   - Test file organization
+   - Naming conventions
+   - AAA pattern (Arrange, Act, Assert)
+   - Test utilities and helpers
+   - Snapshot testing
+
+7. Coverage reporting:
+   - Coverage configuration
+   - Target: 80%+ coverage
+   - Coverage reports (HTML, JSON)
+
+Deliverables needed:
+- vitest.config.ts - Complete Vitest configuration
+- tests/setup.ts - Test environment setup
+- tests/mocks/ - Mock data and API client
+- Unit test examples (utils, hooks, services)
+- Component test examples (with React Testing Library)
+- Redux testing examples
+- Integration test examples
+- E2E test examples (basic)
+- Testing best practices guide
+- CI/CD integration examples
+
+Constraints:
+- Must use Vitest (not Jest)
+- React Testing Library for component testing
+- No Enzyme or old testing libraries
+- User-centric testing (avoid implementation details)
+- Test files should be colocated with source
+- All tests must be TypeScript
+
+Please provide:
+1. Complete Vitest setup
+2. Test configuration files
+3. Mock utilities and helpers
+4. 10+ test examples for different scenarios
+5. Testing best practices
+6. Coverage setup and goals
+7. CI/CD integration examples
+8. Debugging failed tests guide
+```
+
+---
+
+## PHASE 7 PROMPT: Documentation & Finalization
+
+```
+I'm finalizing my React app restructuring. I've completed Phase 1-6 (all technical setup).
+
+Current status: Complete application structure, services, components, state management, routing, and testing are done.
+
+Task: Help me create comprehensive documentation.
+
+Specific requirements:
+1. Architecture Documentation:
+   - Project overview and structure
+   - Data flow and state management
+   - Service layer design
+   - Component hierarchy
+   - Security considerations
+   - Performance optimizations
+
+2. Setup Guide:
+   - Prerequisites (Node.js, npm)
+   - Installation steps
+   - Environment setup
+   - Running development server
+   - Building for production
+   - Deployment instructions
+
+3. Contributing Guidelines:
+   - Code style and conventions
+   - Git workflow (branches, commits, PRs)
+   - Naming conventions (files, components, variables)
+   - Folder structure guidelines
+   - Component creation template
+   - Testing requirements
+
+4. API Documentation:
+   - Available endpoints
+   - Request/response formats
+   - Error codes and handling
+   - Authentication method
+   - Example API calls
+
+5. Features Documentation:
+   - Feature overview
+   - User authentication flow
+   - Data management
+   - Caching strategy
+   - Error handling
+
+6. Developer Guide:
+   - Adding new features
+   - Creating new components
+   - Adding API services
+   - State management patterns
+   - Testing components
+   - Debugging tips
+
+7. Maintenance Guide:
+   - Dependency updates
+   - Security updates
+   - Performance monitoring
+   - Bug reporting
+   - Feature request process
+
+8. Quality Standards:
+   - TypeScript strict mode
+   - ESLint rules
+   - Test coverage targets (80%+)
+   - Performance metrics
+   - Accessibility standards
+
+Deliverables needed:
+- docs/ARCHITECTURE.md - Complete architecture documentation
+- docs/SETUP.md - Setup and installation guide
+- docs/CONTRIBUTING.md - Contributing guidelines
+- docs/API.md - API documentation
+- docs/FEATURES.md - Feature documentation
+- docs/DEVELOPER_GUIDE.md - Developer guide
+- docs/TESTING.md - Testing guide
+- docs/DEPLOYMENT.md - Deployment guide
+- docs/TROUBLESHOOTING.md - Common issues and solutions
+- README.md - Updated project README
+- .github/ISSUE_TEMPLATE/ - GitHub issue templates
+- .github/workflows/ - CI/CD workflow files
+
+Constraints:
+- Documentation must be clear and beginner-friendly
+- Include code examples where relevant
+- Keep documentation DRY (Don't Repeat Yourself)
+- Use consistent formatting and style
+- Include diagrams for complex concepts
+- Regular update schedule
+
+Please provide:
+1. All documentation files (markdown format)
+2. Architecture diagrams (ASCII or mermaid)
+3. GitHub workflow files for CI/CD
+4. Issue and PR templates
+5. README with badges
+6. Checklist for developers
+7. Deployment guides
+8. Troubleshooting common issues
+```
+
+---
+
+## 🎯 HOW TO USE THESE PROMPTS
+
+### Step 1: Prepare Your Environment
+```bash
+# Create a development branch
+git checkout -b refactor/production-restructure
+
+# Create the directory structure
+mkdir -p src/{config,constants,types,hooks,services,utils,middleware,store,components/common,components/features,pages,layouts,routes,styles,assets,lib}
+mkdir -p tests/{unit,integration,e2e}
+mkdir -p docs
+```
+
+### Step 2: Execute Phase by Phase
+
+For each phase:
+1. Copy the relevant PHASE prompt
+2. Share it with Claude or your AI assistant
+3. Follow the generated instructions
+4. Test the implementation
+5. Move to next phase
+
+### Step 3: Validation Checklist
+
+After each phase, verify:
+```bash
+# Phase 1
+✓ Path aliases work correctly
+✓ Environment variables load properly
+✓ TypeScript compilation successful
+
+# Phase 2
+✓ API client makes requests
+✓ Services can be imported
+✓ No console errors
+
+# Phase 3
+✓ Components render without errors
+✓ Styles apply correctly
+✓ All props are typed
+
+# Phase 4
+✓ Redux store initializes
+✓ Actions dispatch successfully
+✓ Selectors return correct data
+
+# Phase 5
+✓ Routes navigate properly
+✓ Protected routes work
+✓ Layouts render
+
+# Phase 6
+✓ Tests run without errors
+✓ Coverage is 80%+
+✓ Mocks work correctly
+
+# Phase 7
+✓ Documentation is complete
+✓ All links work
+✓ Examples are accurate
+```
+
+### Step 4: Code Review Checklist
+
+- [ ] No TypeScript errors
+- [ ] All imports use path aliases
+- [ ] Code follows naming conventions
+- [ ] Components are properly typed
+- [ ] Tests are passing
+- [ ] No console errors/warnings
+- [ ] Performance is acceptable
+- [ ] Security best practices followed
+
+---
+
+## 💡 PRO TIPS
+
+1. **Take Time with Phase 1**: Proper foundation saves time later
+2. **Test Incrementally**: Don't wait until the end to test
+3. **Keep Git Clean**: Commit after each major component
+4. **Document as You Go**: Don't postpone documentation
+5. **Code Review**: Have someone review restructuring
+6. **Backup Original**: Keep backup of original code
+7. **Use Version Control**: Make small commits, not big ones
+
+---
+
+## 🔗 RELATED RESOURCES
+
+- Detailed Structure Plan: See `adler-frontend-restructure-plan.md`
+- TypeScript Best Practices: https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html
+- React Patterns: https://react.dev/learn
+- Redux Best Practices: https://redux.js.org/style-guide/
+- Testing Best Practices: https://kentcdodds.com/blog/common-mistakes-with-react-testing-library
+
+---
+
+**Last Updated**: 2026-07-04
+**Version**: 1.0

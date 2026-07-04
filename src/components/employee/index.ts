@@ -23,22 +23,22 @@ export {
   useUpdateEmployeeStatus,
   useMutatingIds,
   useEmployeeStats,
-  employeeQueryKeys,
-} from '@/hooks/use-employee';
+  employeeKeys as employeeQueryKeys,
+} from '@/features/employees/hooks/use-employees';
 
 // ─────────────────────────────────────────────────────────────
 // API & SERVICES
 // ─────────────────────────────────────────────────────────────
 
 export {
-  appService,
+  employeeService,
   employeeSchema,
   EMPLOYMENT_TYPES,
   EMPLOYEE_STATUSES,
   type Employee,
   type EmployeeInput,
   type EmployeeFilters,
-} from '@/services/emplloye.service';
+} from '@/features/employees/api/employee.service';
 
 // ─────────────────────────────────────────────────────────────
 // UTILITIES & CONSTANTS
@@ -49,4 +49,4 @@ export {
   validateEmployeeForm,
   DEPARTMENTS,
   type ValidationError,
-} from '@/lib/employee-utilits';
+} from '@/lib/employee-utilities';

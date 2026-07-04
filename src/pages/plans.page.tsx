@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useEmployees } from "@/features/employees/hooks/use-employees";
-import { useCategories } from "@/hooks/use-categories";
+import { useCategories } from "@/features/categories/hooks/use-categories";
 import { useAvailability } from "@/features/plans/hooks/use-availability";
 import type { Employee } from "@/features/employees/api/employee.service";
 import type { Availability } from "@/features/plans/api/availability.service";
