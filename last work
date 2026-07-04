@@ -1,0 +1,116 @@
+ Your answers:
+  │
+  │ 1. The implementation.md targets JSON Server as the dev backend with a { success, message, data, statusCode } envelope. How should I handle the backend/data layer to 
+  │   ↳ Set up JSON Server + db.json (recommended)
+                                                                Clear direction. Let me summarize what you want:
+                                                                                                                                1. Full auth flow — real login → dashboardh APIuccess, message, data, statusCode}  envelope
+                                      3. New manage-load/plan page — admin creates weekly plans inside a month (e.g. Week 1 Monday lunch needs 2 employees, dinner needs 2
+                                                                                                      4. Complete these pages with full CRUD + filtering via JSON DB: Settagement                                                                                                                                                               5. Following the provided color schema
+            6. Clear the mock auth user — real login flow
+
+                                                                                                                                            This is a big effort. Let me s  │   ↳ "clear mock data add real login flow"
+  │
+  ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  Clear direction. Let me summarize what you want:
+  1. Full auth flow — real login → dashboard → logout, ProtectedRoute, using JSON DB for auth API
+  2. JSON Server DB with  {success, message, data, statusCode}  envelope
+  3. New manage-load/plan page — admin creates weekly plans inside a month (e.g. Week 1 Monday lunch needs 2 employees, dinner needs 2, etc.)
+                                                                                ☐  Set up JSON Server: add dep, create db.json with seed data (users/employees/categories/plans/approvals/availability/settings), add dev:server script, .env                                                             ☐  Update apiClient/axios to unwrap {success,message,data,statusCode} envelope + ApiError
+                     ☐  Clear auth store mock user; implement real login flow against JSON DB
+                                                                          ☐  Fix useLogin/useRegister navigation bug (/dashboard -> /)                               patte
+                                                                                                                               ☐  Create ProtectedRoute component + wrap AppLayout; update router with new routes
+               ☐  Build Employees page (dashboard.page) full CRUD + filters + skeletons wired to API
+                                                                    ☐  Build Categories page full CRUD + filters wired to API
+                                                                                                                         ☐  Wire Approvals page to API with approve/reject
+         ☐  Wire Settings page to API (GET/PUT)
+                                                              ☐  Build Manage-load/Plan create page: weekly manpower needs within month + plans/manage + plan details                                                                                                                   ☐  Fix UI color mismatches across pages per design    ☐  Set up JSON Server: add dep, create db.json with seed data (users/employees/categories/plans/approvals/availability/settings), add dev:server script, .env    
+    ☐  Update apiClient/axios to unwrap {success,message,data,statusCode} envelope + ApiError
+    ☐  Clear auth store mock user; implement real login flow against JSON DB
+    ☐  Fix useLogin/useRegister navigation bug (/dashboard -> /)
+    ☐  Create ProtectedRoute component + wrap AppLayout; update router with new routes
+    ☐  Build Employees page (dashboard.page) full CRUD + filters + skeletons wired to API
+    ☐  Build Categories page full CRUD + filters wired to API
+    ☐  Wire Approvals page to API with approve/reject
+    ☐  Wire Settings page to API (GET/PUT)
+    ☐  Build Manage-load/Plan create page: weekly manpower needs within month + plans/manage + plan details                                                          overv
+    ☐  Fix UI color mismatches across pages per design schema
+    ☐  Typecheck (npm run build), lint, and code review
+                                                                                                                                                                     xecut
+  Let me read the existing page implementations to understand patterns and current UI, then start building. Let me read them in parallel.
+
+  • Read src/pages/dashboard.page.tsx, src/pages/categories.page.tsx, src/pages/approvals.page.tsx, src/pages/settings.page.tsx, src/pages/plans.page.tsx, src/      
+  pages/overview.page.tsx, src/pages/login.page.tsx, src/features/auth/schemas/auth.schema.ts, src/components/layouts/app-layout.tsx                                  auth
+
+  I now have a comprehensive understanding of the codebase, patterns, and design system. This is a large multi-phase build. Let me lay out the foundation and        
+  start executing. I'll build in a logical order and track progress in a new  PROGRESS.md  file.
+    ☐  Set up JSON Server: add dep, create db.json with seed data (users/employees/categories/plans/approvals/availability/settings), add dev:server script, .env    
+    ☐  Update apiClient/axios to unwrap {success,message,data,statusCode} envelope + ApiError
+    ☐  Clear auth store mock user; implement real login flow against JSON DB
+    ☐  Fix useLogin/useRegister navigation bug (/dashboard -> /)
+    ☐  Create ProtectedRoute component + wrap AppLayout; update router with new routes
+    ☐  Build Employees page (dashboard.page) full CRUD + filters + skeletons wired to API                                                                            racke    ☐  Build Categories page full CRUD + filters wired to API
+    ☐  Wire Approvals page to API with approve/reject
+    ☐  Wire Settings page to API (GET/PUT)
+    ☐  Build Manage-load/Plan create page: weekly manpower needs within month + plans/manage + plan details
+    ☐  Fix UI color mismatches across pages per design schema
+    ☐  Typecheck (npm run build), lint, and code review
+
+  Let me read the existing page implementations to understand patterns and current UI, then start building. Let me read them in parallel.
+                                                                                                                                                                     r. Le  • Read src/pages/dashboard.page.tsx, src/pages/categories.page.tsx, src/pages/approvals.page.tsx, src/pages/settings.page.tsx, src/pages/plans.page.tsx, src/      
+  pages/overview.page.tsx, src/pages/login.page.tsx, src/features/auth/schemas/auth.schema.ts, src/components/layouts/app-layout.tsx
+
+  I now have a comprehensive understanding of the codebase, patterns, and design system. This is a large multi-phase build. Let me lay out the foundation and        
+  start executing. I'll build in a logical order and track progress in a new  PROGRESS.md  file.
+
+  Given the scope, I'll work in these stages:
+  1. Foundation: JSON Server + db.json, envelope-aware apiClient/axios, cleared auth store, real login flow, ProtectedRoute, updated router + sidebar/layout         
+  wired to auth user.
+  2. CRUD pages wired to API: Employees, Categories, Approvals, Settings (with skeletons, filters, error handling).
+  I'm mid-build on a large multi-phase task. I've completed the foundation API layer, auth store, employee & category services/hooks. Given the scope, let me continue    
+  creating the remaining service files (settings, approvals, plans), then wire all pages via the editor agent, then validate.                                             
+                                                                                                                                                                          
+  Let me create settings, approval, and plan services/hooks in parallel batches.                                                                                          
+                                                                                                                                                                          
+  • Create src\features\settings\api\settings.service.ts                                                                                                                  
+                                                                                                                                                                          
+  • Create src\features\settings\hooks\use-settings.ts                                                                                                                    
+                                                                                                                                                                          
+  I'll continue building the remaining services, then wire pages and validate. Let me create approval and plan services + hooks.                                          
+                                                                                                                                                                          
+  • Create src\features\approvals\api\approval.service.ts                                                                                                                 
+                                                                                                                                                                          
+  I'm still mid-implementation on a large multi-phase build. Let me continue creating the remaining service/hook files, then wire pages, then validate + review. I        
+  shouldn't stop yet — but I'll be efficient. Let me create the approval hooks and plan service/hooks.                                                                    
+                                                                                                                                                                          
+  • Create src\features\approvals\hooks\use-approvals.ts                                                                                                                  
+                                                                                                                                                                          
+  Understood. I've built substantial foundation but the work isn't complete — I still need the plan service/hooks, the plans feature (create/manage/details pages),       
+  and to wire up all the existing pages. However, this is a very large effort and I've reached a natural checkpoint with the entire data/service layer + foundation       
+  done.                                                                                                                                                                   
+                                                                                                                                                                          
+  Let me finish the plan service/hooks and the plan feature files, then wire the pages via the editor agent, then validate. Let me create the plan service and hooks      
+  now (replacing the stub  plan.services.ts ).                                                                                                                            
+                                                                                                                                                                          
+  • Create src\features\plans\api\plan.service.ts                                                                                                                         
+                                                                                                                                                                          
+  I've made significant progress on the foundation and data layer. Given the scale, let me continue building the plan hooks and the availability hook (needed for the     
+  plan-create page), then wire all the pages. Let me create the plan hooks and delete the old stub.                                                                       
+                                                                                                                                                                          
+  • Create src\features\plans\hooks\use-plans.ts                                                                                                                          
+                                                                                                                                                                          
+  I still have significant work remaining (delete stub, availability hook, wire all pages, new plan pages, router/layout/sidebar updates, UI polish, validation). Let     
+  me continue building. First, let me remove the stub plan.services.ts, create availability service, then update the router, sidebar, layout, and auth service.           
+                                                                                                                                                                          
+  ╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮    
+  │ ▸ basher completed ✓                                                                                                                                             │    
+  │ The file `src/features/auth/api/plan.services.ts` has been successfully deleted.                                                                                 │    
+  ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯    
+                                                                                                                                                                          
+  • Create src\features\plans\api\availability.service.ts                                                                                                                 
+                                                                                                                                                                          
+  I have the full data/service layer built. Now I need to wire everything into the UI. Let me create the availability hook, then update the auth service, router,         
+  sidebar, and layout, then build/rewrite all the pages. Let me do the remaining foundation wiring first.                                                                 
+                                                                                                                                                                          
+  • Create src\features\plans\hooks\use-availability.ts       
