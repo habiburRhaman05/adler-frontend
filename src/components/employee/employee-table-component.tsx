@@ -37,11 +37,11 @@ import type { Employee } from '@/features/employees/api/employee.service';
 
 const STATUS_THEME = {
   Active: {
-    bg: 'bg-emerald-50',
-    text: 'text-emerald-700',
-    border: 'border-emerald-200',
-    badge: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    shadow: 'shadow-emerald-100/50',
+    bg: 'bg-blue-50',
+    text: 'text-blue-700',
+    border: 'border-blue-200',
+    badge: 'bg-blue-100 text-blue-700 border-blue-200',
+    shadow: 'shadow-blue-100/50',
   },
   Suspension: {
     bg: 'bg-amber-50',
@@ -366,7 +366,7 @@ const EmployeeActionMenu = memo(function EmployeeActionMenu({
             </>
           ) : (
             <>
-              <CheckCircle2 className="mr-2 h-4 w-4 text-emerald-500" /> Activate
+              <CheckCircle2 className="mr-2 h-4 w-4 text-blue-500" /> Activate
             </>
           )}
         </DropdownMenuItem>

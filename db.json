@@ -217,7 +217,53 @@
       "phone": "",
       "address": "",
       "avatar": "",
-      "categories": [],
+      "categories": [
+    {
+      "id": "service",
+      "name": "Service",
+      "description": "Front-of-house dining service",
+      "defaultRate": 28,
+      "maxShifts": 10,
+      "sub": ["Runner", "Chef de Rang", "Commis"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "bar",
+      "name": "Bar",
+      "description": "Drinks, cocktails and bar service",
+      "defaultRate": 29,
+      "maxShifts": 8,
+      "sub": ["Cocktails", "Service Bar"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "description": "Food preparation and cooking",
+      "defaultRate": 30,
+      "maxShifts": 10,
+      "sub": ["Grill", "Entremetier", "Garde Manger"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "dishwashing",
+      "name": "Dishwashing",
+      "description": "Kitchen cleaning and dish service",
+      "defaultRate": 24,
+      "maxShifts": 8,
+      "sub": [],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "office",
+      "name": "Office",
+      "description": "Administration and reception",
+      "defaultRate": 26,
+      "maxShifts": 6,
+      "sub": ["Admin", "Reception"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    }
+  ],
       "contract": "monthly",
       "workload": 100
     },
@@ -234,7 +280,53 @@
       "phone": "rhgdgdfg",
       "address": "dfgdfgdfgdfgfd",
       "avatar": "",
-      "categories": [],
+      "categories": [
+    {
+      "id": "service",
+      "name": "Service",
+      "description": "Front-of-house dining service",
+      "defaultRate": 28,
+      "maxShifts": 10,
+      "sub": ["Runner", "Chef de Rang", "Commis"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "bar",
+      "name": "Bar",
+      "description": "Drinks, cocktails and bar service",
+      "defaultRate": 29,
+      "maxShifts": 8,
+      "sub": ["Cocktails", "Service Bar"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "description": "Food preparation and cooking",
+      "defaultRate": 30,
+      "maxShifts": 10,
+      "sub": ["Grill", "Entremetier", "Garde Manger"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "dishwashing",
+      "name": "Dishwashing",
+      "description": "Kitchen cleaning and dish service",
+      "defaultRate": 24,
+      "maxShifts": 8,
+      "sub": [],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "office",
+      "name": "Office",
+      "description": "Administration and reception",
+      "defaultRate": 26,
+      "maxShifts": 6,
+      "sub": ["Admin", "Reception"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    }
+  ],
       "contract": "monthly",
       "workload": 20
     },
@@ -251,12 +343,104 @@
       "phone": "sdfsdfsd",
       "address": "fsdfsdfsdfds",
       "avatar": "",
-      "categories": [],
+      "categories": [
+    {
+      "id": "service",
+      "name": "Service",
+      "description": "Front-of-house dining service",
+      "defaultRate": 28,
+      "maxShifts": 10,
+      "sub": ["Runner", "Chef de Rang", "Commis"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "bar",
+      "name": "Bar",
+      "description": "Drinks, cocktails and bar service",
+      "defaultRate": 29,
+      "maxShifts": 8,
+      "sub": ["Cocktails", "Service Bar"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "description": "Food preparation and cooking",
+      "defaultRate": 30,
+      "maxShifts": 10,
+      "sub": ["Grill", "Entremetier", "Garde Manger"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "dishwashing",
+      "name": "Dishwashing",
+      "description": "Kitchen cleaning and dish service",
+      "defaultRate": 24,
+      "maxShifts": 8,
+      "sub": [],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "office",
+      "name": "Office",
+      "description": "Administration and reception",
+      "defaultRate": 26,
+      "maxShifts": 6,
+      "sub": ["Admin", "Reception"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    }
+  ],
       "contract": "monthly",
       "workload": 100
     }
   ],
-  "categories": [],
+  "categories": [
+    {
+      "id": "service",
+      "name": "Service",
+      "description": "Front-of-house dining service",
+      "defaultRate": 28,
+      "maxShifts": 10,
+      "sub": ["Runner", "Chef de Rang", "Commis"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "bar",
+      "name": "Bar",
+      "description": "Drinks, cocktails and bar service",
+      "defaultRate": 29,
+      "maxShifts": 8,
+      "sub": ["Cocktails", "Service Bar"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "description": "Food preparation and cooking",
+      "defaultRate": 30,
+      "maxShifts": 10,
+      "sub": ["Grill", "Entremetier", "Garde Manger"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "dishwashing",
+      "name": "Dishwashing",
+      "description": "Kitchen cleaning and dish service",
+      "defaultRate": 24,
+      "maxShifts": 8,
+      "sub": [],
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "office",
+      "name": "Office",
+      "description": "Administration and reception",
+      "defaultRate": 26,
+      "maxShifts": 6,
+      "sub": ["Admin", "Reception"],
+      "createdAt": "2026-01-01T00:00:00Z"
+    }
+  ],
   "availability": [
     {
       "id": "avail1",
@@ -1322,6 +1506,53 @@
       "overtime": 0,
       "due": 5,
       "wage": 3950
+    }
+  ],
+  "workload-sheets": [
+    {
+      "id": "wl1",
+      "month": "2026-07",
+      "weekNumber": 1,
+      "dateRange": { "start": "2026-06-29", "end": "2026-07-05" },
+      "label": "Week 1",
+      "status": "published",
+      "entries": [
+        { "day": "Monday", "shiftType": "Lunch", "categoryId": "service", "categoryName": "Service", "required": 3 },
+        { "day": "Monday", "shiftType": "Dinner", "categoryId": "service", "categoryName": "Service", "required": 2 },
+        { "day": "Monday", "shiftType": "Lunch", "categoryId": "bar", "categoryName": "Bar", "required": 2 },
+        { "day": "Monday", "shiftType": "Dinner", "categoryId": "bar", "categoryName": "Bar", "required": 3 },
+        { "day": "Tuesday", "shiftType": "Lunch", "categoryId": "service", "categoryName": "Service", "required": 2 },
+        { "day": "Tuesday", "shiftType": "Dinner", "categoryId": "service", "categoryName": "Service", "required": 2 },
+        { "day": "Wednesday", "shiftType": "Lunch", "categoryId": "service", "categoryName": "Service", "required": 3 },
+        { "day": "Wednesday", "shiftType": "Dinner", "categoryId": "bar", "categoryName": "Bar", "required": 2 },
+        { "day": "Thursday", "shiftType": "Lunch", "categoryId": "service", "categoryName": "Service", "required": 2 },
+        { "day": "Thursday", "shiftType": "Dinner", "categoryId": "service", "categoryName": "Service", "required": 3 },
+        { "day": "Friday", "shiftType": "Lunch", "categoryId": "bar", "categoryName": "Bar", "required": 2 },
+        { "day": "Friday", "shiftType": "Dinner", "categoryId": "bar", "categoryName": "Bar", "required": 3 },
+        { "day": "Saturday", "shiftType": "Dinner", "categoryId": "bar", "categoryName": "Bar", "required": 4 },
+        { "day": "Sunday", "shiftType": "Dinner", "categoryId": "service", "categoryName": "Service", "required": 2 }
+      ],
+      "createdAt": "2026-06-25T10:00:00Z",
+      "updatedAt": "2026-06-28T15:00:00Z"
+    },
+    {
+      "id": "wl2",
+      "month": "2026-07",
+      "weekNumber": 2,
+      "dateRange": { "start": "2026-07-06", "end": "2026-07-12" },
+      "label": "Week 2",
+      "status": "draft",
+      "entries": [
+        { "day": "Monday", "shiftType": "Lunch", "categoryId": "service", "categoryName": "Service", "required": 2 },
+        { "day": "Monday", "shiftType": "Dinner", "categoryId": "service", "categoryName": "Service", "required": 2 },
+        { "day": "Tuesday", "shiftType": "Lunch", "categoryId": "bar", "categoryName": "Bar", "required": 1 },
+        { "day": "Tuesday", "shiftType": "Dinner", "categoryId": "bar", "categoryName": "Bar", "required": 2 },
+        { "day": "Friday", "shiftType": "Dinner", "categoryId": "service", "categoryName": "Service", "required": 3 },
+        { "day": "Friday", "shiftType": "Dinner", "categoryId": "bar", "categoryName": "Bar", "required": 2 },
+        { "day": "Saturday", "shiftType": "Dinner", "categoryId": "bar", "categoryName": "Bar", "required": 3 }
+      ],
+      "createdAt": "2026-07-01T10:00:00Z",
+      "updatedAt": "2026-07-02T12:00:00Z"
     }
   ],
   "settings": {

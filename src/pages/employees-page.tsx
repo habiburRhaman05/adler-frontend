@@ -189,7 +189,7 @@ export function EmployeesPage() {
 
         {/* Table */}
         <EmployeeTableContainer
-          employees={employees}
+          employees={employees as any}
           isLoading={isLoading}
           isError={isError}
           isFetching={isFetching}

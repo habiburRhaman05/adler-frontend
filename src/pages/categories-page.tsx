@@ -45,8 +45,8 @@ export function CategoriesPage() {
       />
 
       <AddCategoryDialog open={addOpen} onOpenChange={setAddOpen} />
-      <EditCategoryDialog category={editing} onClose={() => setEditing(null)} />
-      <DeleteCategoryDialog category={deleteTarget} onClose={() => setDeleteTarget(null)} />
+      <EditCategoryDialog category={editing as any} onClose={() => setEditing(null)} />
+      <DeleteCategoryDialog category={deleteTarget as any} onClose={() => setDeleteTarget(null)} />
     </div>
   );
 }

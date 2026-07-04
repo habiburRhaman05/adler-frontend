@@ -19,7 +19,7 @@ import { formatDate } from "@/lib/utils";
 const STATUS_META: Record<string, { label: string; cls: string }> = {
   draft: { label: "Draft", cls: "bg-slate-100 text-slate-600 border-slate-200" },
   submitted: { label: "Submitted", cls: "bg-amber-50 text-amber-600 border-amber-200" },
-  approved: { label: "Approved", cls: "bg-emerald-50 text-emerald-600 border-emerald-200" },
+  approved: { label: "Approved", cls: "bg-blue-50 text-blue-600 border-blue-200" },
   rejected: { label: "Rejected", cls: "bg-rose-50 text-rose-600 border-rose-200" },
 };
 

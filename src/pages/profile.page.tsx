@@ -84,7 +84,7 @@ export function ProfilePage() {
                   <div key={slot.day} className="flex items-center justify-between rounded-xl border border-slate-200 p-4 bg-white">
                     <span className="font-bold text-slate-900 w-28">{slot.day}</span>
                     {slot.available ? (
-                      <span className="text-sm font-medium text-slate-600 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-lg border border-emerald-100">
+                      <span className="text-sm font-medium text-slate-600 bg-blue-50 text-blue-700 px-3 py-1 rounded-lg border border-blue-100">
                         {slot.timeRange.start} – {slot.timeRange.end}
                       </span>
                     ) : (

@@ -7,6 +7,7 @@ From the two provided images we extract a unified color palette. **Image 1** yie
 Use dark text (#101010 or darker grays) on light backgrounds (e.g. #EDEBE8) and white text on very dark backgrounds. Confirm that each text/background pair meets **WCAG contrast** of ≥4.5:1. For example, #101010 text on #EDEBE8 yields very high contrast, while #EDEBE8 text on #101010 is similar. Pairing white (#FFFFFF) on #101010 also gives high contrast. Adjust tints if needed to maintain readability.  
 
 # Accessibility & Contrast Checks  
+
 Ensure all text and interactive elements meet **accessibility standards**. In particular, **contrast ratios** should follow WCAG: normal text ≥4.5:1, large text ≥3:1. For example, dark text on #EDEBE8 yields >18:1 contrast, which is excellent. On dark panels (e.g. #101010 or #686566), use white or very light text to maintain ≥4.5:1 contrast. Test combinations with tools like WebAIM’s checker.  
 
 Likewise, make all clickable targets large enough. WCAG requires a minimum target of 24×24 CSS pixels, but best practice (Material/Android guidelines) is at least 48×48 dp (about 9 mm). Thus increase sidebar link and icon areas (and menu icons) to ~48px height/width for comfortable touch targeting. Adding ~8px spacing between targets is also advised.  

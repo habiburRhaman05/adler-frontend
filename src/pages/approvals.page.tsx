@@ -136,11 +136,11 @@ function SwapCard({ swap, nameOf, onApprove, onReject, readOnly, busy }: {
             <Clock className="h-3.5 w-3.5" /> Requested {formatDate(swap.submittedDate)}
           </div>
           {swap.status === "pending" ? (
-            <Badge variant="outline" className={`px-3 py-1 rounded-lg font-semibold ${d.ruleCheck === "pass" ? "border-emerald-200 text-emerald-700 bg-emerald-50 shadow-sm shadow-emerald-100" : "border-red-200 text-red-700 bg-red-50 shadow-sm shadow-red-100"}`}>
+            <Badge variant="outline" className={`px-3 py-1 rounded-lg font-semibold ${d.ruleCheck === "pass" ? "border-blue-200 text-blue-700 bg-blue-50 shadow-sm shadow-blue-100" : "border-red-200 text-red-700 bg-red-50 shadow-sm shadow-red-100"}`}>
               {d.ruleCheck === "pass" ? <><CheckCircle2 className="h-3.5 w-3.5 mr-1.5" />Rules OK</> : <><AlertTriangle className="h-3.5 w-3.5 mr-1.5" />Rule fail</>}
             </Badge>
           ) : (
-            <Badge variant="outline" className={`px-3 py-1 rounded-lg font-semibold ${swap.status === "approved" ? "border-emerald-200 text-emerald-700 bg-emerald-50" : "border-red-200 text-red-700 bg-red-50"}`}>
+            <Badge variant="outline" className={`px-3 py-1 rounded-lg font-semibold ${swap.status === "approved" ? "border-blue-200 text-blue-700 bg-blue-50" : "border-red-200 text-red-700 bg-red-50"}`}>
               {swap.status === "approved" ? "Approved" : "Rejected"}
             </Badge>
           )}

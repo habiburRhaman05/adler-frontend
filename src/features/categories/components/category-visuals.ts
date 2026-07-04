@@ -28,7 +28,7 @@ export const CATEGORY_ICON_GRADIENTS: Record<string, string> = {
   kitchen: "from-amber-500 to-orange-600 shadow-amber-500/30",
   bar: "from-purple-600 to-purple-700 shadow-purple-600/30",
   office: "from-slate-700 to-slate-800 shadow-slate-700/30",
-  commande: "from-emerald-600 to-emerald-700 shadow-emerald-600/30",
+  commande: "from-blue-600 to-blue-700 shadow-blue-600/30",
   dishwashing: "from-sky-600 to-sky-700 shadow-sky-600/30",
 };
 

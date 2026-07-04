@@ -34,16 +34,16 @@ export function LoginPage() {
   const passwordField = register('password');
 
   return (
-    <div className="relative min-h-screen flex overflow-hidden bg-[#0a0e1a]">
+    <div className="relative min-h-screen flex overflow-hidden bg-[#0F172A]">
       {/* ── Animated gradient background ── */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e1a] via-[#0f1a3a] to-[#1a0a2e]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]" />
 
         {/* Animated orbs */}
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] animate-pulse-slow rounded-full bg-gradient-to-br from-blue-600/20 via-blue-500/10 to-transparent blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] animate-pulse-slower rounded-full bg-gradient-to-tr from-indigo-600/20 via-purple-500/10 to-transparent blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 h-[400px] w-[400px] animate-pulse-medium rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-600/10 blur-3xl" />
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] animate-pulse-slow rounded-full bg-gradient-to-br from-blue-600/15 via-blue-500/8 to-transparent blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] animate-pulse-slower rounded-full bg-gradient-to-tr from-sky-500/15 via-blue-400/8 to-transparent blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 h-[400px] w-[400px] animate-pulse-medium rounded-full bg-gradient-to-r from-sky-400/8 to-blue-600/8 blur-3xl" />
 
         {/* Grid overlay */}
         <div
@@ -83,7 +83,7 @@ export function LoginPage() {
             <h2 className="text-4xl font-bold leading-tight text-white">
               Streamline your
               <br />
-              <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-sky-400 bg-clip-text text-transparent">
                 team scheduling
               </span>
             </h2>

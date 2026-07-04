@@ -334,7 +334,7 @@ export function PlansPage() {
                 </CardTitle>
                 <p className="text-sm font-medium text-slate-500 mt-2 flex items-center gap-2">
                   <span className="inline-flex items-center gap-1.5">
-                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-100" />
+                    <span className="inline-block h-2.5 w-2.5 rounded-full bg-blue-500 ring-2 ring-blue-100" />
                     <span className="text-slate-600">Available</span>
                   </span>
                   <span className="inline-flex items-center gap-1.5">
@@ -444,7 +444,7 @@ export function PlansPage() {
                       {availCount > 0 && dayOfWeek < 5 ? (
                         <div className="mt-auto space-y-1">
                           <div className="h-1.5 rounded-full bg-blue-500 w-full" />
-                          <div className="h-1.5 rounded-full bg-emerald-500" style={{ width: `${Math.min(100, availCount / Math.max(1, active.length) * 100)}%` }} />
+                          <div className="h-1.5 rounded-full bg-blue-500" style={{ width: `${Math.min(100, availCount / Math.max(1, active.length) * 100)}%` }} />
                           <span className="text-[11px] font-bold text-slate-600 block mt-1">{availCount} available</span>
                         </div>
                       ) : (
@@ -458,7 +458,7 @@ export function PlansPage() {
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-blue-500" /> Selected week
                 </span>
-                <Badge variant="outline" className="border-emerald-200 text-emerald-700 bg-emerald-50 font-semibold px-2.5 py-0.5 rounded-md">
+                <Badge variant="outline" className="border-blue-200 text-blue-700 bg-blue-50 font-semibold px-2.5 py-0.5 rounded-md">
                   {active.length} employees
                 </Badge>
                 <Badge variant="outline" className="border-slate-200 text-slate-500 bg-white font-semibold px-2.5 py-0.5 rounded-md">
@@ -513,7 +513,7 @@ function EmployeeRow({
             <div className={`rounded-xl border p-2.5 space-y-2 transition-all ${
               avail === "unavailable" ? "bg-slate-50 border-slate-200" :
               avail === "wish" ? "bg-blue-50/60 border-blue-200 hover:border-blue-300" :
-              "bg-emerald-50/60 border-emerald-200 hover:border-emerald-300"
+              "bg-blue-50/60 border-blue-200 hover:border-blue-300"
             }`}>
               {avail === "unavailable" ? (
                 <div className="h-[68px] flex items-center justify-center">

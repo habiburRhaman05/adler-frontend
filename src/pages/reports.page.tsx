@@ -122,7 +122,7 @@ export function ReportsPage() {
         <SumCard icon={<Clock />} label="Total worked" value={`${totals.worked} h`} colorClass="bg-blue-50 text-blue-600 shadow-sm shadow-blue-100" loading={isLoading} />
         <SumCard icon={<TrendingUp />} label="Overtime" value={`${totals.overtime} h`} accent colorClass="bg-amber-50 text-amber-600 shadow-sm shadow-amber-100" loading={isLoading} />
         <SumCard icon={<Clock />} label="Hours due" value={`${totals.due} h`} colorClass="bg-red-50 text-red-600 shadow-sm shadow-red-100" loading={isLoading} />
-        <SumCard icon={<Wallet />} label="Wage cost" value={`CHF ${totals.wage.toLocaleString()}`} colorClass="bg-emerald-50 text-emerald-600 shadow-sm shadow-emerald-100" loading={isLoading} />
+        <SumCard icon={<Wallet />} label="Wage cost" value={`CHF ${totals.wage.toLocaleString()}`} colorClass="bg-blue-50 text-blue-600 shadow-sm shadow-blue-100" loading={isLoading} />
       </div>
 
       <Card className="rounded-2xl border-slate-200/80 shadow-lg shadow-slate-100/50 bg-white/90 backdrop-blur-sm overflow-hidden">

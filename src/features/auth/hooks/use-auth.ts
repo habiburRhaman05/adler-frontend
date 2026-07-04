@@ -23,7 +23,7 @@ export function useLogin() {
       toast.success('Welcome back!', {
         description: `Signed in as ${data.admin.email}`,
       });
-      navigate('/', { replace: true });
+      navigate('/dashboard', { replace: true });
     },
     onError: () => {
       toast.error('Login failed', {

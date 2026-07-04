@@ -44,12 +44,12 @@ export function UserDropdown() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="my-1 bg-slate-100" />
         <DropdownMenuItem asChild className="cursor-pointer rounded-lg mx-0.5 my-0.5">
-          <Link to="/profile">
+          <Link to="/dashboard/profile">
             <UserIcon className="mr-2 h-4 w-4 text-slate-500" /> Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="cursor-pointer rounded-lg mx-0.5 my-0.5">
-          <Link to="/settings">
+          <Link to="/dashboard/settings">
             <SettingsIcon className="mr-2 h-4 w-4 text-slate-500" /> Settings
           </Link>
         </DropdownMenuItem>

@@ -8,10 +8,7 @@ interface ProtectedRouteProps {
   requiredRole?: UserRole;
 }
 
-/**
- * Session timeout in milliseconds (30 minutes of inactivity).
- * Set to `null` to disable automatic timeout.
- */
+
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 
 export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) {
@@ -22,7 +19,6 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
   const logout = useAuthStore((s) => s.logout);
   const location = useLocation();
 
-  // ── Session timeout check ─────────────────────────────────
   useEffect(() => {
     if (!isAuthenticated || !lastActivity || !SESSION_TIMEOUT_MS) return;
 
@@ -32,8 +28,7 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
     }
   }, [isAuthenticated, lastActivity, logout]);
 
-  // ── Hydration guard ──────────────────────────────────────
-  // Wait for Zustand persist to rehydrate before deciding.
+
   if (!isHydrated) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#f0f5ff]">
@@ -45,15 +40,15 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
     );
   }
 
-  // ── Not authenticated → redirect to login ────────────────
+
   if (!admin || !isAuthenticated) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  // ── Role check ───────────────────────────────────────────
+
   if (requiredRole && admin.role !== requiredRole) {
-    // Redirect to home with an unauthorized message
-    return <Navigate to="/" replace />;
+
+    return <Navigate to="/dashboard" replace />;
   }
 
   return <>{children}</>;

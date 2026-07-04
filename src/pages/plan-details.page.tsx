@@ -18,7 +18,7 @@ import { useCategories } from "@/features/categories/hooks/use-categories";
 const STATUS_META: Record<string, { label: string; cls: string }> = {
   draft: { label: "Draft", cls: "bg-slate-100 text-slate-600 border-slate-200" },
   submitted: { label: "Submitted", cls: "bg-amber-50 text-amber-600 border-amber-200" },
-  approved: { label: "Approved", cls: "bg-emerald-50 text-emerald-600 border-emerald-200" },
+  approved: { label: "Approved", cls: "bg-blue-50 text-blue-600 border-blue-200" },
   rejected: { label: "Rejected", cls: "bg-rose-50 text-rose-600 border-rose-200" },
 };
 
@@ -84,7 +84,7 @@ export function PlanDetailsPage() {
               </Button>
             )}
             {plan.status === "submitted" && (
-              <Button onClick={() => changeStatus.mutate({ id: plan.id, status: "approved" })} disabled={changeStatus.isPending} className="rounded-xl font-semibold bg-emerald-600 hover:bg-emerald-700 shadow-md">
+              <Button onClick={() => changeStatus.mutate({ id: plan.id, status: "approved" })} disabled={changeStatus.isPending} className="rounded-xl font-semibold bg-blue-600 hover:bg-blue-700 shadow-md">
                 <CheckCircle2 className="h-4 w-4 mr-2" /> Approve
               </Button>
             )}
