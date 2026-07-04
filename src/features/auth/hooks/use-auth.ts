@@ -17,9 +17,11 @@ export function useLogin() {
   return useMutation({
     mutationFn: (credentials: LoginInput) => authService.login(credentials),
     onSuccess: (data) => {
-      login(data.user, data.accessToken, data.refreshToken);
+      console.log(data);
+      
+      login(data.admin);
       toast.success('Welcome back!', {
-        description: `Signed in as ${data.user.email}`,
+        description: `Signed in as ${data.admin.email}`,
       });
       navigate('/', { replace: true });
     },
@@ -69,17 +71,18 @@ export function useLogout() {
 }
 
 export function useCurrentUser() {
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+
   const setUser = useAuthStore((s) => s.setUser);
 
   return useQuery({
     queryKey: authKeys.me(),
     queryFn: async () => {
       const user = await authService.me();
-      setUser(user);
-      return user;
+      console.log(user);
+      
+      setUser(user.admin);
+      return user
     },
-    enabled: isAuthenticated,
     staleTime: 10 * 60 * 1000,
   });
 }

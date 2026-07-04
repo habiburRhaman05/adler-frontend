@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { approvalService, type ApprovalFilters } from '../api/approval.service';
 
@@ -11,6 +11,7 @@ export function useApprovals(filters: ApprovalFilters = {}) {
   return useQuery({
     queryKey: approvalKeys.list(filters),
     queryFn: () => approvalService.getAll(filters),
+    placeholderData: keepPreviousData,
   });
 }
 

@@ -3,10 +3,10 @@ import { ArrowLeft, Home } from 'lucide-react';
 
 export function NotFoundPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950">
+    <div className="flex min-h-screen items-center justify-center bg-[#0f172a]">
       <div className="text-center">
         {/* 404 Number */}
-        <h1 className="bg-gradient-to-r from-violet-400 via-cyan-400 to-fuchsia-400 bg-clip-text text-8xl font-black text-transparent">
+        <h1 className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-8xl font-black text-transparent">
           404
         </h1>
 
@@ -30,8 +30,8 @@ export function NotFoundPage() {
           </button>
 
           <Link
-            to="/dashboard"
-            className="flex h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 px-5 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all duration-300 hover:shadow-violet-500/40 hover:brightness-110"
+            to="/"
+            className="flex h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-blue-500/40 hover:brightness-110"
           >
             <Home className="h-4 w-4" />
             Dashboard

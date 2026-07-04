@@ -10,9 +10,7 @@ import {
 
 export const authService = {
   login: async (credentials: LoginInput): Promise<AuthResponse> => {
-    return apiClient.post<AuthResponse>('/auth/login', credentials, {
-      schema: authResponseSchema,
-    });
+    return apiClient.post<AuthResponse>('/auth/admin/login', credentials);
   },
 
   register: async (data: RegisterInput): Promise<AuthResponse> => {
@@ -22,12 +20,10 @@ export const authService = {
   },
 
   me: async (): Promise<UserResponse> => {
-    return apiClient.get<UserResponse>('/auth/me', {
-      schema: userSchema,
-    });
+    return apiClient.get<UserResponse>('/auth/admin/profile');
   },
 
   logout: async (): Promise<void> => {
-    return apiClient.post<void>('/auth/logout');
+    return apiClient.post<void>('/auth/admin/logout');
   },
 };

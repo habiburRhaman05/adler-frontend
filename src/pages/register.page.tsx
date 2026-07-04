@@ -63,10 +63,10 @@ export function RegisterPage() {
               autoComplete="name"
               disabled={isPending}
               {...register('name')}
-              className={`h-12 w-full rounded-xl border bg-slate-50 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border bg-blue-50/50 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
                 errors.name
                   ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
-                  : 'border-slate-200 focus:border-primary focus:ring-primary/20'
+                  : 'border-blue-200 focus:border-blue-400 focus:ring-blue-500/20'
               } disabled:cursor-not-allowed disabled:opacity-50`}
             />
           </div>
@@ -92,10 +92,10 @@ export function RegisterPage() {
               autoComplete="email"
               disabled={isPending}
               {...register('email')}
-              className={`h-12 w-full rounded-xl border bg-slate-50 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border bg-blue-50/50 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
                 errors.email
                   ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
-                  : 'border-slate-200 focus:border-primary focus:ring-primary/20'
+                  : 'border-blue-200 focus:border-blue-400 focus:ring-blue-500/20'
               } disabled:cursor-not-allowed disabled:opacity-50`}
             />
           </div>
@@ -121,10 +121,10 @@ export function RegisterPage() {
               autoComplete="new-password"
               disabled={isPending}
               {...register('password')}
-              className={`h-12 w-full rounded-xl border bg-slate-50 pl-11 pr-11 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border bg-blue-50/50 pl-11 pr-11 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
                 errors.password
                   ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
-                  : 'border-slate-200 focus:border-primary focus:ring-primary/20'
+                  : 'border-blue-200 focus:border-blue-400 focus:ring-blue-500/20'
               } disabled:cursor-not-allowed disabled:opacity-50`}
             />
             <button
@@ -161,10 +161,10 @@ export function RegisterPage() {
               autoComplete="new-password"
               disabled={isPending}
               {...register('confirmPassword')}
-              className={`h-12 w-full rounded-xl border bg-slate-50 pl-11 pr-11 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border bg-blue-50/50 pl-11 pr-11 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:bg-white focus:ring-2 ${
                 errors.confirmPassword
                   ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
-                  : 'border-slate-200 focus:border-primary focus:ring-primary/20'
+                  : 'border-blue-200 focus:border-blue-400 focus:ring-blue-500/20'
               } disabled:cursor-not-allowed disabled:opacity-50`}
             />
             <button
@@ -190,7 +190,7 @@ export function RegisterPage() {
         <button
           type="submit"
           disabled={isPending}
-          className="relative h-12 w-full overflow-hidden rounded-xl bg-primary text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
+          className="relative h-12 w-full overflow-hidden rounded-xl bg-blue-600 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-600/40 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isPending ? (
             <span className="flex items-center justify-center gap-2">
@@ -209,7 +209,7 @@ export function RegisterPage() {
           <div className="w-full border-t border-slate-200" />
         </div>
         <div className="relative flex justify-center text-xs">
-          <span className="bg-white px-2 font-medium text-slate-500">
+          <span className="bg-[#f0f5ff] px-2 font-medium text-slate-500">
             Already have an account?
           </span>
         </div>
@@ -218,7 +218,7 @@ export function RegisterPage() {
       {/* Login link */}
       <Link
         to="/login"
-        className="flex h-12 w-full items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-sm font-bold text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:text-slate-900"
+        className="flex h-12 w-full items-center justify-center rounded-xl border-2 border-blue-200 bg-white text-sm font-bold text-slate-700 transition-all duration-200 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700"
       >
         Sign in instead
       </Link>
