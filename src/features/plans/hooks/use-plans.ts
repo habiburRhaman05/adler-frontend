@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import {
   planService,
@@ -17,6 +17,7 @@ export function usePlans(filters: PlanFilters = {}) {
   return useQuery({
     queryKey: planKeys.list(filters),
     queryFn: () => planService.getAll(filters),
+    placeholderData: keepPreviousData,
   });
 }
 
@@ -25,6 +26,7 @@ export function usePlan(id: string | undefined) {
     queryKey: planKeys.detail(id ?? ''),
     queryFn: () => planService.getById(id as string),
     enabled: !!id,
+    placeholderData: keepPreviousData,
   });
 }
 

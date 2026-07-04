@@ -30,9 +30,9 @@ export interface SelectOption {
 }
 
 /** Build a query string from a filters object, skipping empty/all values. */
-export function buildQuery(params: Record<string, string | number | undefined | null>): string {
+export function buildQuery(params: object): string {
   const sp = new URLSearchParams();
-  for (const [key, value] of Object.entries(params)) {
+  for (const [key, value] of Object.entries(params as Record<string, unknown>)) {
     if (value === undefined || value === null || value === '' || value === 'all') continue;
     sp.append(key, String(value));
   }

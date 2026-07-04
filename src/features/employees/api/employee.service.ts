@@ -45,6 +45,7 @@ export interface EmployeeFilters {
   department?: string;
   status?: string;
   employmentType?: string;
+  categories?: string;
   _page?: number;
   _limit?: number;
 }
