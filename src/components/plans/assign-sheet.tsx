@@ -3,8 +3,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFo
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Trash2 } from "lucide-react";
-import { DAYS, type Worker, type Category, type AssignedSlot } from "../../lib/plan-data";
+import { Trash2, AlertCircle } from "lucide-react";
+import { DAYS, type Worker, type Category, type AssignedSlot, type Plan } from "../../lib/plan-data";
 
 export interface AssignSheetData {
   day: number;
@@ -19,35 +19,63 @@ interface AssignSheetProps {
   data: AssignSheetData | null;
   workers: Worker[];
   categories: Category[];
+  plan: Plan;
   onClose: () => void;
   onAssign: (workerId: string, categoryId: string, start: string, end: string, existing?: AssignedSlot) => void;
   onDelete: (slotId: string) => void;
 }
 
-export function AssignSheet({ data, workers, categories, onClose, onAssign, onDelete }: AssignSheetProps) {
+export function AssignSheet({ data, workers, categories, plan, onClose, onAssign, onDelete }: AssignSheetProps) {
   const [workerId, setWorkerId] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (data) {
       setWorkerId(data.workerId || "");
       setCategoryId(data.categoryId || "");
       setStart(data.start || "09:00");
+      setError(null);
       
       // Default to 8 hour shift if no existing end time
       if (data.end) {
         setEnd(data.end);
       } else {
-        const startHour = parseInt(data.start.split(":")[0]);
+        const startHour = parseInt((data.start || "09:00").split(":")[0]);
         const defaultEndHour = Math.min(23, startHour + 8);
         setEnd(`${defaultEndHour.toString().padStart(2, '0')}:00`);
       }
     }
   }, [data]);
 
+  // Check for conflicts
+  useEffect(() => {
+    if (!data || !workerId || !start || !end) {
+      setError(null);
+      return;
+    }
+    const day = data.day;
+    const conflictingSlot = plan.slots.find(s => {
+      // Don't conflict with itself if we are editing
+      if (data.existing && s.id === data.existing.id) return false;
+      // Must be same day and same worker
+      if (s.day !== day || s.workerId !== workerId) return false;
+      
+      // Check time overlap: (StartA < EndB) and (EndA > StartB)
+      return start < s.end && end > s.start;
+    });
+
+    if (conflictingSlot) {
+      setError(`Worker is already assigned to a shift from ${conflictingSlot.start} to ${conflictingSlot.end}`);
+    } else {
+      setError(null);
+    }
+  }, [workerId, start, end, data, plan.slots]);
+
   const handleSave = () => {
+    if (error) return; // Prevent saving if there's an error
     if (workerId && categoryId && start && end) {
       onAssign(workerId, categoryId, start, end, data?.existing);
       onClose();
@@ -110,6 +138,13 @@ export function AssignSheet({ data, workers, categories, onClose, onAssign, onDe
               <Input type="time" value={end} onChange={(e) => setEnd(e.target.value)} className="h-12 rounded-xl bg-slate-50 border-slate-200 font-black text-slate-700 shadow-sm" />
             </div>
           </div>
+          
+          {error && (
+            <div className="flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 p-3 mt-4">
+              <AlertCircle className="h-4 w-4 shrink-0 text-rose-600 mt-0.5" />
+              <p className="text-sm font-bold text-rose-700 leading-tight">{error}</p>
+            </div>
+          )}
         </div>
 
         <SheetFooter className="flex flex-row items-center justify-between mt-auto pt-6 border-t border-slate-100">
@@ -126,7 +161,7 @@ export function AssignSheet({ data, workers, categories, onClose, onAssign, onDe
           )}
           <div className="flex gap-2">
             <Button variant="outline" onClick={onClose} className="rounded-xl h-11 font-bold border-slate-200">Cancel</Button>
-            <Button onClick={handleSave} disabled={!workerId || !categoryId || !start || !end} className="rounded-xl h-11 px-6 font-bold shadow-md shadow-primary/20">
+            <Button onClick={handleSave} disabled={!workerId || !categoryId || !start || !end || !!error} className="rounded-xl h-11 px-6 font-bold shadow-md shadow-primary/20">
               Save Shift
             </Button>
           </div>

@@ -211,6 +211,7 @@ function PlanDetailsPage() {
         data={assignSheetData}
         workers={workers}
         categories={categories}
+        plan={plan}
         onClose={() => setAssignSheetData(null)}
         onAssign={(workerId, categoryId, start, end, existing) => {
           const worker = workers.find(w => w.id === workerId);
