@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { CalendarRange, Trash2, ArrowRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 import { api, MONTHS, type Plan } from "../../lib/plan-data";
-import { StatTile } from "./stat-tile";
 
 interface PlanCardProps {
   plan: Plan;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { CalendarRange } from "lucide-react";
+import { CalendarRange, Loader2 } from "lucide-react";
 import { useDB } from "@/lib/plan-data";
 import { CreatePlanDialog } from "@/components/plans/create-plan-dialog";
 import { PlanFiltersBar } from "@/components/plans/plan-filters-bar";
@@ -31,7 +31,7 @@ export function PlansPage() {
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-foreground overflow-hidden dark:bg-slate-950">
-      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white">
+      <header className="relative top-0 z-20 border-b border-slate-200 bg-white">
         <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center justify-between gap-4 px-6 py-4">
           <div className="flex items-center gap-4 animate-in fade-in slide-in-from-top-2 duration-500">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm">

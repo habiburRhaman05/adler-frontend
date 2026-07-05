@@ -137,13 +137,7 @@ function PlanDetailsPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 text-foreground overflow-hidden dark:bg-slate-950">
-      {/* Vibrant Background Mesh */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-[20%] -right-[10%] h-[600px] w-[600px] rounded-full bg-primary/20 blur-[120px] mix-blend-multiply opacity-70 animate-pulse dark:mix-blend-screen" />
-        <div className="absolute top-[20%] -left-[10%] h-[500px] w-[500px] rounded-full bg-indigo-400/20 blur-[100px] mix-blend-multiply opacity-70 dark:mix-blend-screen" />
-        <div className="absolute -bottom-[10%] left-[20%] h-[700px] w-[700px] rounded-full bg-sky-300/20 blur-[120px] mix-blend-multiply opacity-70 dark:mix-blend-screen" />
-      </div>
+    <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
 
       <div className="relative z-10">
         <PlanPageHeader
@@ -157,14 +151,13 @@ function PlanDetailsPage() {
                 <Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…
               </span>
             )}
-            <div className="hidden items-center gap-1.5 rounded-xl border border-border bg-background px-3 py-1.5 text-sm shadow-sm sm:flex">
-              <DollarSign className="h-3.5 w-3.5 text-primary" />
-              <span className="font-medium text-muted-foreground">Cost</span>
-              <span className="font-bold">${totalCost.toFixed(0)}</span>
+            <div className="hidden items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm shadow-sm sm:flex text-slate-900">
+              <DollarSign className="h-3.5 w-3.5 text-slate-500" />
+              <span className="font-medium text-slate-500">Cost</span>
+              <span className="font-black">${totalCost.toFixed(0)}</span>
             </div>
-            {/* <ManageCategoriesDialog categories={categories} /> */}
             <Link to={`/dashboard/plans/${plan.id}/summary`}>
-              <Button variant="outline" size="sm" className="gap-1.5  bg-blue-500 text-white hover:bg-blue-600 py-2 rounded-xl font-semibold">
+              <Button size="sm" className="gap-1.5 bg-blue-600 text-white hover:bg-blue-700 py-2 px-5 rounded-full font-bold shadow-md shadow-blue-600/20">
                 <CheckCircle2 className="h-4 w-4" />
                 Submit plan
               </Button>
@@ -173,7 +166,7 @@ function PlanDetailsPage() {
         }
       />
 
-      <div className="mx-auto max-w-[1600px] space-y-4 px-6 py-6">
+      <div className="mx-auto max-w-[1600px] space-y-6 px-6 py-8">
         {overstaffed.length > 0 && (
           <div className="flex items-start gap-3 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300">
             <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500/20 text-amber-600">
