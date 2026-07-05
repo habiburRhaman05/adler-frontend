@@ -1,52 +1,47 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+import type { User } from '@/features/auth/schemas/auth.schema';
+
+// ─── Roles ──────────────────────────────────────────────────
 export const UserRole = {
   ADMIN: 'admin',
   EMPLOYEE: 'employee',
 } as const;
 
-export type UserRole = typeof UserRole[keyof typeof UserRole];
+export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-  role: UserRole;
-  createdAt: string;
-}
-
+// ─── State ──────────────────────────────────────────────────
 interface AuthState {
-  user: User | null;
-  accessToken: string | null;
-  refreshToken: string | null;
+  /** Authenticated user info (null when logged out). */
+  admin: User | null;
+  /** Derived from admin !== null. */
   isAuthenticated: boolean;
+  /** True once the persisted state has been hydrated from storage. */
   isHydrated: boolean;
+  /** Timestamp (ms) of last user activity for session timeout. */
+  lastActivity: number | null;
 }
 
 interface AuthActions {
-  login: (user: User, accessToken: string, refreshToken?: string) => void;
+  /** Called after a successful login. */
+  login: (admin: User) => void;
+  /** Called after logout or session expiry. */
   logout: () => void;
-  setUser: (user: User) => void;
-  setTokens: (accessToken: string, refreshToken?: string) => void;
+  /** Update the current user (e.g. after profile fetch). */
+  setUser: (admin: User) => void;
+  /** Mark the store as hydrated (called by persist callback). */
   setHydrated: () => void;
+  /** Touch the activity timer (call on user interaction). */
+  touchActivity: () => void;
 }
 
 type AuthStore = AuthState & AuthActions;
 
 const initialState: AuthState = {
-  user:{
-    id: '04516',
-    name: 'Jhon Doe',
-    email: 'jhon.doe@gmail.com',
-    avatar: '',
-    role: 'admin',
-    createdAt: '2023-01-01T00:00:00Z',
-  },
-  accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0NTE2IiwibmFtZSI6Ikpob24gRG9lIiwiZW1haWwiOiJqaG9uLmRvZUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ3NzYwMDAsImV4cCI6MTY5NDc3OTYwMH0.7k8zFjK8sL8sL8sL8sL8sL8sL8sL8sL8sL8sL8sL8  ",
-  refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0NTE2IiwibmFtZSI6Ikpob24gRG9lIiwiZW1haWwiOiJqaG9uLmRvZUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ3NzYwMDAsImV4cCI6MTY5NDc3OTYwMH0.7k8zFjK8sL8sL8sL8sL8sL8sL8sL8sL8sL8sL8sL8  "  ,
-  isAuthenticated: true,
+  admin: null,
+  isAuthenticated: false,
   isHydrated: false,
+  lastActivity: null,
 };
 
 export const useAuthStore = create<AuthStore>()(
@@ -54,37 +49,33 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       ...initialState,
 
-      login: (user, accessToken, refreshToken) =>
+      login: (admin) =>
         set({
-          user,
-          accessToken,
-          refreshToken: refreshToken || null,
+          admin,
           isAuthenticated: true,
+          isHydrated: true,
+          lastActivity: Date.now(),
         }),
 
       logout: () =>
         set({
-          ...initialState,
+          admin: null,
+          isAuthenticated: false,
           isHydrated: true,
+          lastActivity: null,
         }),
 
-      setUser: (user) => set({ user }),
-
-      setTokens: (accessToken, refreshToken) =>
-        set({
-          accessToken,
-          refreshToken: refreshToken || null,
-        }),
+      setUser: (admin) => set({ admin }),
 
       setHydrated: () => set({ isHydrated: true }),
+
+      touchActivity: () => set({ lastActivity: Date.now() }),
     }),
     {
       name: 'auth-storage',
-      storage: createJSONStorage(() => localStorage),
+      // Only persist admin — tokens are managed via httpOnly cookies
       partialize: (state) => ({
-        user: state.user,
-        accessToken: state.accessToken,
-        refreshToken: state.refreshToken,
+        admin: state.admin,
         isAuthenticated: state.isAuthenticated,
       }),
       onRehydrateStorage: () => (state) => {

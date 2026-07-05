@@ -7,6 +7,7 @@ import {
   ArrowLeftRight,
   BarChart3,
   Settings as SettingsIcon,
+  ClipboardList,
   UtensilsCrossed,
 } from "lucide-react";
 
@@ -22,59 +23,100 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
 import { Badge } from "@/components/ui/badge";
+import { useAuthStore } from "@/stores/auth.store";
+import { initials } from "@/lib/utils";
+import { useApprovals } from "@/features/approvals/hooks/use-approvals";
 
 const items = [
-  { title: "Overview", url: "/", icon: LayoutDashboard },
-  { title: "Manage Plans", url: "/plans", icon: CalendarRange },
-  { title: "Employees", url: "/employees", icon: Users },
-  { title: "Categories", url: "/categories", icon: Layers },
-  { title: "Shift Approvals", url: "/approvals", icon: ArrowLeftRight, badge: 3 },
-  { title: "Reports", url: "/reports", icon: BarChart3 },
-  { title: "Settings", url: "/settings", icon: SettingsIcon },
+  { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
+  { title: "Weekly Plan", url: "/dashboard/plans", icon: CalendarRange },
+  { title: "Employees", url: "/dashboard/employees", icon: Users },
+  { title: "Workload", url: "/dashboard/workload", icon: ClipboardList },
+  { title: "Categories", url: "/dashboard/categories", icon: Layers },
+  {
+    title: "Shift Approvals",
+    url: "/dashboard/approvals",
+    icon: ArrowLeftRight,
+    approvalsBadge: true,
+  },
+  { title: "Reports", url: "/dashboard/reports", icon: BarChart3 },
+  { title: "Settings", url: "/dashboard/settings", icon: SettingsIcon },
 ];
 
 export function AppSidebar() {
   const location = useLocation();
   const pathname = location.pathname;
+  const user = useAuthStore((s) => s.admin);
+  const { data: approvals } = useApprovals({ status: "pending" });
+  const pendingCount = approvals?.total ?? 0;
+
+  const isActive = (url: string) =>
+    url === "/dashboard"
+      ? pathname === "/dashboard"
+      : pathname === url || pathname.startsWith(url + "/");
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-slate-200 bg-white">
-      <SidebarHeader className="border-b border-slate-100">
-        <div className="flex items-center gap-3 px-2 py-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white shadow-sm shadow-primary/20">
-            <UtensilsCrossed className="h-5 w-5" />
-          </div>
-          <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-            <span className="font-bold text-slate-900 text-lg leading-none tracking-tight">BOMACH OS</span>
-            <span className="text-xs text-slate-500 font-medium mt-1">Staff planning</span>
-          </div>
-        </div>
-      </SidebarHeader>
+    <Sidebar
+      collapsible="icon"
+      className="bg-[#F1F5F9]/80 backdrop-blur-xl border-r border-[#E2E8F0]"
+    >
+      {/* ── Header ──────────────────────────────────── */}
+      <SidebarHeader className="h-16 border-b border-[#E2E8F0] bg-transparent">
+  <div className="flex h-full items-center px-3 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
+    <div className="flex items-center gap-3 group-data-[collapsible=icon]:gap-0">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-600/25 transition-all duration-200 group-data-[collapsible=icon]:h-9 group-data-[collapsible=icon]:w-9">
+        <UtensilsCrossed className="h-5 w-5 group-data-[collapsible=icon]:h-4 group-data-[collapsible=icon]:w-4" />
+      </div>
 
-      <SidebarContent className="bg-white">
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-slate-400 font-semibold uppercase tracking-wider text-[10px]">Workspace</SidebarGroupLabel>
+      <div className="flex flex-col leading-tight group-data-[collapsible=icon]:hidden">
+        <span className="text-lg font-bold tracking-tight text-[#1E293B]">
+          ADLER
+        </span>
+        <span className="text-xs font-medium text-[#64748B]">
+          Staff Planning
+        </span>
+      </div>
+    </div>
+  </div>
+</SidebarHeader>
+
+      {/* ── Navigation ──────────────────────────────── */}
+      <SidebarContent className="bg-transparent group-data-[collapsible=icon]:gap-0">
+        <SidebarGroup className="group-data-[collapsible=icon]:p-0">
+          <SidebarGroupLabel className="text-[11px] uppercase tracking-[0.2em] text-[#64748B] font-semibold px-4">
+            Workspace
+          </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="px-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:gap-0">
               {items.map((item) => {
-                const active = pathname === item.url;
+                const active = isActive(item.url);
+                const showBadge = item.approvalsBadge && pendingCount > 0;
+
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton 
-                      asChild 
-                      isActive={active} 
+                    <SidebarMenuButton
+                      asChild
+                      isActive={active}
                       tooltip={item.title}
-                      className={`font-medium transition-colors ${active ? "bg-primary/5 text-primary" : "text-slate-600 hover:text-primary hover:bg-slate-50"}`}
+                      size="lg"
+                      className={`rounded-xl transition-all duration-200 font-medium ${
+                        active
+                          ? "bg-blue-600 text-white shadow-md shadow-blue-600/20 hover:bg-blue-700"
+                          : "text-[#64748B] hover:bg-[#E2E8F0] hover:text-[#1E293B]"
+                      }`}
                     >
-                      <Link to={item.url} className="flex items-center gap-3 py-2">
-                        <item.icon className="h-4 w-4" />
-                        <span>{item.title}</span>
-                        {item.badge ? (
-                          <Badge className={`ml-auto h-5 min-w-5 px-1.5 ${active ? "bg-primary text-white" : "bg-slate-100 text-slate-600"}`}>
-                            {item.badge}
+                      <Link to={item.url}>
+                        <item.icon className="h-5 w-5 shrink-0 group-data-[collapsible=icon]:mx-auto" />
+                        <span className="text-sm group-data-[collapsible=icon]:hidden">
+                          {item.title}
+                        </span>
+                        {showBadge && (
+                          <Badge className="ml-auto h-6 min-w-6 px-1.5 bg-white text-blue-600 rounded-md text-[11px] font-bold border border-blue-200 shadow-sm group-data-[collapsible=icon]:hidden">
+                            {pendingCount}
                           </Badge>
-                        ) : null}
+                        )}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -85,16 +127,40 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-slate-100 bg-white">
-        <div className="flex items-center gap-3 px-2 py-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600 text-sm font-bold border border-slate-200">
-            MK
-          </div>
-          <div className="flex flex-col text-xs group-data-[collapsible=icon]:hidden">
-            <span className="font-semibold text-slate-900">Martin Keller</span>
-            <span className="text-slate-500">Administrator</span>
-          </div>
-        </div>
+      {/* ── Footer / Profile ────────────────────────── */}
+      <SidebarFooter className="border-t border-[#E2E8F0] bg-transparent group-data-[collapsible=icon]:p-0">
+        <SidebarMenuButton
+          asChild
+          isActive={pathname === "/dashboard/profile"}
+          tooltip={user?.name ?? "Profile"}
+          size="lg"
+          className={`rounded-xl transition-all duration-200 font-medium ${
+            pathname === "/dashboard/profile"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/20 hover:bg-blue-700"
+              : "text-[#64748B] hover:bg-[#E2E8F0] hover:text-[#1E293B]"
+          }`}
+        >
+          <Link
+            to="/dashboard/profile"
+            className="flex items-center gap-3 px-3 py-2 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:gap-0"
+          >
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 text-xs font-bold text-white shadow-lg shadow-blue-600/20 group-data-[collapsible=icon]:h-8 group-data-[collapsible=icon]:w-8">
+              {user?.avatar ? (
+                <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
+              ) : (
+                initials(user?.name)
+              )}
+            </div>
+            <div className="flex flex-col min-w-0 group-data-[collapsible=icon]:hidden">
+              <span className="truncate font-semibold text-sm">
+                {user?.name ?? "Account"}
+              </span>
+              <span className="truncate text-xs font-medium opacity-70">
+                {user?.role ?? "User"}
+              </span>
+            </div>
+          </Link>
+        </SidebarMenuButton>
       </SidebarFooter>
     </Sidebar>
   );

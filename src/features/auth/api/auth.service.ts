@@ -1,33 +1,32 @@
 import { apiClient } from '@/lib/api-client';
 import {
-  authResponseSchema,
-  userSchema,
-  type AuthResponse,
+  loginResponseSchema,
+  meResponseSchema,
   type LoginInput,
-  type RegisterInput,
-  type UserResponse,
+  type LoginResponse,
+  type MeResponse,
 } from '../schemas/auth.schema';
 
 export const authService = {
-  login: async (credentials: LoginInput): Promise<AuthResponse> => {
-    return apiClient.post<AuthResponse>('/auth/login', credentials, {
-      schema: authResponseSchema,
+  login: async (credentials: LoginInput): Promise<LoginResponse> => {
+    return apiClient.post<LoginResponse>('/auth/admin/login', credentials, {
+      schema: loginResponseSchema,
     });
   },
 
-  register: async (data: RegisterInput): Promise<AuthResponse> => {
-    return apiClient.post<AuthResponse>('/auth/register', data, {
-      schema: authResponseSchema,
-    });
-  },
-
-  me: async (): Promise<UserResponse> => {
-    return apiClient.get<UserResponse>('/auth/me', {
-      schema: userSchema,
+  me: async (): Promise<MeResponse> => {
+    return apiClient.get<MeResponse>('/auth/admin/profile', {
+      schema: meResponseSchema,
     });
   },
 
   logout: async (): Promise<void> => {
-    return apiClient.post<void>('/auth/logout');
+    return apiClient.post<void>('/auth/admin/logout', undefined);
+  },
+  updateProfile: async (): Promise<void> => {
+    return apiClient.patch<void>('/auth/admin/profile', undefined);
+  },
+  changePassword: async (): Promise<void> => {
+    return apiClient.patch<void>('/auth/admin/change-password', undefined);
   },
 };

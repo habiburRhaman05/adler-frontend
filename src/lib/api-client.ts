@@ -1,23 +1,29 @@
 import type { AxiosRequestConfig } from 'axios';
 import type { ZodType } from 'zod';
-import api from './axios';
+import api, { type ApiEnvelope } from './axios';
 
 interface ApiRequestConfig<T> extends AxiosRequestConfig {
   schema?: ZodType<T>;
 }
 
 /**
- * Execute an API request with optional Zod schema validation.
- * If a schema is provided, the response data is parsed and validated at runtime.
+ * Execute an API request. The backend always returns a
+ * { success, message, data, statusCode } envelope — this unwraps `data`.
+ * If a schema is provided, the unwrapped data is validated at runtime.
  */
 async function request<T>(config: ApiRequestConfig<T>): Promise<T> {
-  const response = await api.request(config);
+  const response = await api.request<ApiEnvelope<T>>(config);
+
+  // Unwrap the envelope. Fall back to raw body if a plain response is returned.
+  const body = response.data;
+  const payload =
+    body && typeof body === 'object' && 'data' in body ? body.data : (body as unknown as T);
 
   if (config.schema) {
-    return config.schema.parse(response.data);
+    return config.schema.parse(payload);
   }
 
-  return response.data as T;
+  return payload as T;
 }
 
 /** Type-safe API client with Zod runtime validation */
