@@ -36,22 +36,20 @@ export function CalendarView({ workers, plan, categories, onOpenAssign }: Calend
   );
 
   const visibleWorkerIds = new Set(filteredWorkers.map(w => w.id));
-  const visibleSlots = plan.slots.filter(s => visibleWorkerIds.has(s.workerId) || visibleWorkerIds.has((s as any).overrideRowWorkerId || ""));
+  const visibleSlots = (plan.slots || []).filter(s => visibleWorkerIds.has(s.workerId) || visibleWorkerIds.has((s as any).overrideRowWorkerId || ""));
 
-  const getSlotStyle = (startStr: string, endStr: string) => {
+  const getSlotStyle = (startStr: string) => {
     const parseTime = (time: string) => {
       const [h, m] = time.split(":").map(Number);
       return h + m / 60;
     };
     const s = parseTime(startStr);
-    const e = parseTime(endStr);
     
     const startY = Math.max(0, s - START_HOUR);
-    const duration = Math.min(e, END_HOUR) - Math.max(s, START_HOUR);
 
     return {
       top: `${(startY / TOTAL_HOURS) * 100}%`,
-      height: `${(duration / TOTAL_HOURS) * 100}%`,
+      height: `90px`, // Fixed height so it's a single uniform cell regardless of duration!
     };
   };
 
@@ -71,8 +69,11 @@ export function CalendarView({ workers, plan, categories, onOpenAssign }: Calend
          const [e2h, e2m] = last.end.split(":").map(Number);
          
          const s1 = s1h * 60 + s1m;
-         const e2 = e2h * 60 + e2m;
          
+         // We use a fixed visual duration of 1 hour (60 mins) for overlap checking 
+         // since all cards are now fixed height!
+         const e2 = (e2h * 60 + e2m) > (s1 + 60) ? e2h * 60 + e2m : s1 + 60; // Approximate fixed overlap logic
+
          if (s1 >= e2) { 
             col.push(slot);
             placed = true;
@@ -91,7 +92,7 @@ export function CalendarView({ workers, plan, categories, onOpenAssign }: Calend
         positionedSlots.push({
            ...slot,
            style: {
-             ...getSlotStyle(slot.start, slot.end),
+             ...getSlotStyle(slot.start),
              width: `${90 / numCols}%`,
              left: `${(c * (100 / numCols)) + 2}%`
            }
@@ -101,10 +102,19 @@ export function CalendarView({ workers, plan, categories, onOpenAssign }: Calend
     return positionedSlots;
   };
 
+  const getPlanWeekDate = (dayIdx: number) => {
+    const firstDayOfMonth = new Date(plan.year, plan.month, 1);
+    const firstDayOfWeek = firstDayOfMonth.getDay();
+    const calendarStart = new Date(plan.year, plan.month, 1 - firstDayOfWeek);
+    const date = new Date(calendarStart.getTime() + ((plan.week - 1) * 7 + dayIdx) * 24 * 60 * 60 * 1000);
+    const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return `${date.getDate()} ${MONTHS[date.getMonth()].slice(0, 3)}`;
+  };
+
   return (
     <>
-      {isFullscreen && <div className="fixed inset-0 bg-slate-900/40 z-40 backdrop-blur-sm transition-all" onClick={() => setIsFullscreen(false)} />}
-      <div className={`w-full overflow-hidden rounded-3xl border border-slate-200 bg-white flex flex-col transition-all duration-500 ease-in-out ${isFullscreen ? "fixed inset-4 z-50 shadow-2xl h-[calc(100vh-32px)]" : "shadow-[0_4px_20px_-8px_rgba(0,0,0,0.05)] h-full min-h-[800px] relative"}`}>
+      {isFullscreen && <div className="fixed inset-0 bg-slate-900/40 z-[90] backdrop-blur-sm transition-all" onClick={() => setIsFullscreen(false)} />}
+      <div className={`w-full overflow-hidden rounded-3xl border border-slate-200 bg-white flex flex-col transition-all duration-500 ease-in-out ${isFullscreen ? "fixed inset-4 z-[100] shadow-2xl h-[calc(100vh-32px)]" : "shadow-[0_4px_20px_-8px_rgba(0,0,0,0.05)] h-full min-h-[800px] relative"}`}>
         
         {/* Top Control Bar */}
         <div className="flex flex-col gap-3 p-4 border-b border-slate-200 bg-white z-40 sticky top-0 shrink-0 sm:flex-row sm:items-center">
@@ -159,16 +169,17 @@ export function CalendarView({ workers, plan, categories, onOpenAssign }: Calend
               <div className="p-4 border-r border-slate-200 text-[9px] font-black text-slate-400 uppercase text-center flex items-center justify-center">
                 GMT
               </div>
-              {DAYS.map((d) => (
-                <div key={d} className="py-4 border-r border-slate-100 last:border-0 text-center">
+              {DAYS.map((d, dayIdx) => (
+                <div key={d} className="py-4 border-r border-slate-100 last:border-0 text-center flex flex-col items-center justify-center">
                   <div className="text-sm font-black text-slate-900 tracking-tight">{d}</div>
+                  <div className="text-[11px] font-bold text-slate-500 mt-0.5">{getPlanWeekDate(dayIdx)}</div>
                 </div>
               ))}
             </div>
 
             {/* Grid */}
             <div className="flex-1 overflow-y-auto relative bg-slate-50/30">
-              <div className="grid grid-cols-[60px_repeat(7,1fr)] relative" style={{ height: `${TOTAL_HOURS * 200}px` }}>
+              <div className="grid grid-cols-[60px_repeat(7,1fr)] relative" style={{ height: `${TOTAL_HOURS * 100}px` }}>
                 
                 {/* Horizontal Grid Lines */}
                 <div className="absolute inset-0 pointer-events-none flex flex-col justify-between ml-[60px] z-0">
@@ -222,19 +233,13 @@ export function CalendarView({ workers, plan, categories, onOpenAssign }: Calend
                           <div
                             key={slot.id}
                             onClick={(e) => { e.stopPropagation(); onOpenAssign(dayIdx, slot.start, slot); }}
-                            className="absolute rounded-xl shadow-sm border border-slate-200/60 p-5 flex flex-col overflow-hidden transition-all hover:scale-[1.02] hover:shadow-md cursor-pointer hover:z-20 bg-white min-h-[110px]"
+                            className="absolute rounded-xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] border border-slate-200/80 p-3 flex flex-col overflow-hidden transition-all hover:scale-[1.02] hover:shadow-md hover:border-slate-300 cursor-pointer hover:z-20 bg-white"
                             style={{ ...slot.style, zIndex: 10 }}
                           >
                             {cat && <div className={`absolute inset-y-0 left-0 w-1.5 ${cat.color}`} />}
-                            <div className="pl-1 flex flex-col h-full text-left">
-                              <span className="text-[12px] font-black leading-tight text-slate-800 line-clamp-1">{worker.name}</span>
-                              <span className="text-[11px] font-bold text-slate-400 mt-1">{slot.start} - {slot.end}</span>
-                              {cat && (
-                                <div className="mt-auto pt-2 flex items-center gap-1.5 overflow-hidden">
-                                   <div className={`h-2.5 w-2.5 rounded-full flex-shrink-0 ${cat.color}`} />
-                                   <span className="text-[10px] font-black text-slate-500 truncate uppercase tracking-widest">{cat.name}</span>
-                                </div>
-                              )}
+                            <div className="pl-1 flex flex-col h-full text-left justify-center">
+                              <span className="text-[13px] font-bold leading-tight text-slate-800 line-clamp-1">{worker.name}</span>
+                              <span className="text-[11px] font-bold text-slate-400 mt-0.5">{slot.start} - {slot.end}</span>
                             </div>
                           </div>
                         )

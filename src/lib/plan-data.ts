@@ -143,12 +143,25 @@ function readDB(): DB {
   if (typeof window === "undefined") return seedDB();
   try {
     const raw = window.localStorage.getItem(DB_KEY);
+    const seeded = seedDB();
     if (!raw) {
-      const seeded = seedDB();
       window.localStorage.setItem(DB_KEY, JSON.stringify(seeded));
       return seeded;
     }
-    return JSON.parse(raw) as DB;
+    const parsed = JSON.parse(raw) as DB;
+    
+    // Merge missing fields in case the localStorage format is from an older version
+    const merged = {
+      ...seeded,
+      ...parsed,
+    };
+    
+    // Specifically handle workers and categories in case they were completely absent
+    if (!parsed.workers) merged.workers = seeded.workers;
+    if (!parsed.categories) merged.categories = seeded.categories;
+    if (!parsed.plans) merged.plans = seeded.plans;
+
+    return merged;
   } catch {
     return seedDB();
   }

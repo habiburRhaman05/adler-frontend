@@ -33,9 +33,9 @@ function countByCategory(slots: AssignedSlot[], excludeSlotId?: string) {
 }
 
 function PlanDetailsPage() {
-  const { id } = useParams<{ id: string }>();
+  const { planId } = useParams<{ planId: string }>();
   const db = useDB();
-  const plan = db.plans.find((p) => p.id === id);
+  const plan = db.plans.find((p) => p.id === planId);
   const categories = db.categories;
   const workers = db.workers;
 
@@ -60,8 +60,9 @@ function PlanDetailsPage() {
     );
   }
 
-  const totalCost = plan.slots.reduce((s, x) => s + x.cost, 0);
-  const assignedCounts = countByCategory(plan.slots);
+  const slots = plan.slots || [];
+  const totalCost = slots.reduce((s, x) => s + x.cost, 0);
+  const assignedCounts = countByCategory(slots);
   const overstaffed = plan.workload.filter(
     (r) => (assignedCounts.get(r.categoryId) ?? 0) > r.needed,
   );
@@ -78,7 +79,7 @@ function PlanDetailsPage() {
     categoryId: string,
   ) => {
     const requirement = plan.workload.find((r) => r.categoryId === categoryId);
-    const counts = countByCategory(plan.slots, existing?.id);
+    const counts = countByCategory(plan.slots || [], existing?.id);
     const willBeCount = (counts.get(categoryId) ?? 0) + 1;
 
     if (requirement && willBeCount > requirement.needed) {
@@ -114,8 +115,8 @@ function PlanDetailsPage() {
           status: "pending",
         };
     const nextSlots = existing
-      ? plan.slots.map((s) => (s.id === existing.id ? newSlot : s))
-      : [...plan.slots, newSlot];
+      ? (plan.slots || []).map((s) => (s.id === existing.id ? newSlot : s))
+      : [...(plan.slots || []), newSlot];
     setSaving(true);
     await api.updatePlan(plan.id, { slots: nextSlots });
     setSaving(false);
@@ -123,7 +124,7 @@ function PlanDetailsPage() {
 
   const clearSlot = async (slotId: string) => {
     setSaving(true);
-    await api.updatePlan(plan.id, { slots: plan.slots.filter((s) => s.id !== slotId) });
+    await api.updatePlan(plan.id, { slots: (plan.slots || []).filter((s) => s.id !== slotId) });
     setSaving(false);
   };
 

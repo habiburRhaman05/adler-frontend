@@ -23,9 +23,9 @@ import { DayColumn } from "@/components/plans/day-column";
 import { ReassignDialog } from "@/components/plans/reassign-dialog";
 
 function PlanSummaryPage() {
-  const { id } = useParams<{ id: string }>();
+  const { planId } = useParams<{ planId: string }>();
   const db = useDB();
-  const plan = db.plans.find((p) => p.id === id);
+  const plan = db.plans.find((p) => p.id === planId);
   const workers = db.workers;
   const categories = db.categories;
   const [reassign, setReassign] = useState<AssignedSlot | null>(null);

@@ -69,7 +69,7 @@ export function WorkloadBar({ plan, categories, assignedCounts }: WorkloadBarPro
   };
 
   return (
-    <div className="rounded-2xl border border-white/60 bg-white/50 p-5 shadow-md backdrop-blur-xl dark:border-white/10 dark:bg-card/50">
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <div>
           <h2 className="font-bold tracking-tight">Workload status</h2>
