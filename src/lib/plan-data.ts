@@ -195,6 +195,52 @@ export const api = {
   async createPlan(input: Omit<Plan, "id" | "createdAt" | "slots">) {
     const db = readDB();
     const plan: Plan = { ...input, id: uid("plan"), slots: [], createdAt: Date.now() };
+    
+    // --- START MOCK DATA GENERATION ---
+    const newWorkload: WorkloadRequirement[] = db.categories.map((cat, i) => ({
+      id: uid("r"),
+      categoryId: cat.id,
+      label: `${cat.name} requirements`,
+      needed: Math.floor(Math.random() * 3) + 1,
+    }));
+    plan.workload = newWorkload;
+
+    const slots: AssignedSlot[] = [];
+    for (const req of newWorkload) {
+      const eligibleWorkers = db.workers.filter(w => w.categoryId === req.categoryId);
+      for (let day = 0; day < 7; day++) {
+         const toAssign = Math.floor(Math.random() * req.needed) + 1;
+         // Shuffle eligible workers
+         const shuffled = [...eligibleWorkers].sort(() => 0.5 - Math.random());
+         const assignedWorkers = shuffled.slice(0, toAssign);
+         for (const w of assignedWorkers) {
+           const avail = w.availability.find(a => a.day === day);
+           if (avail) {
+             const cost = hoursBetween(avail.start, avail.end) * (db.categories.find(c => c.id === w.categoryId)?.hourlyRate || 10);
+             slots.push({
+               id: uid("s"),
+               workerId: w.id,
+               categoryId: w.categoryId,
+               day,
+               start: avail.start,
+               end: avail.end,
+               hours: hoursBetween(avail.start, avail.end),
+               cost: Number(cost.toFixed(2)),
+               status: "accepted"
+             });
+           }
+         }
+      }
+    }
+    plan.slots = slots;
+    
+    console.log(`[FULL LOG] Schedule for ${plan.name}`);
+    db.workers.forEach(w => {
+      const workerSlots = plan.slots.filter(s => s.workerId === w.id);
+      console.log(`User ${w.name}:`, workerSlots);
+    });
+    // --- END MOCK DATA GENERATION ---
+
     db.plans = [plan, ...db.plans];
     writeDB(db);
     await delay(null);
