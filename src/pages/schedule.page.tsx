@@ -97,7 +97,7 @@ export function SchedulePage() {
               </div>
             )}
             
-            <Button onClick={() => setShowGenerateModal(true)} variant={state?.generated ? "outline" : "default"} className={!state?.generated ? "bg-blue-600 hover:bg-blue-700" : ""}>
+            <Button  onClick={() => setShowGenerateModal(true)} variant={state?.generated ? "outline" : "default"} className={!state?.generated ? "bg-blue-600 text-white hover:bg-blue-700" : ""}>
               {state?.generated ? <><Settings2 className="h-4 w-4 mr-2" /> Regenerate</> : "Generate Schedule"}
             </Button>
           </div>
