@@ -17,6 +17,8 @@ import { ReportsPage } from '@/pages/reports.page';
 import { SettingsPage } from '@/pages/settings.page';
 import { WorkloadPage } from '@/pages/workload.page';
 import DemandPage from '@/pages/DemandPage';
+import { SchedulePage } from '@/pages/schedule.page';
+
 export const router = createBrowserRouter([
   {
     // Public landing page
@@ -55,6 +57,7 @@ export const router = createBrowserRouter([
       { path: 'settings', element: <SettingsPage /> },
       { path: 'profile', element: <ProfilePage /> },
       { path: 'demands', element: <DemandPage /> },
+      { path: 'schedule', element: <SchedulePage /> },
       
     ],
   },
