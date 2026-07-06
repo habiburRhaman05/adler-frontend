@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { format } from "date-fns";
 import { AlertTriangle, Plus, CheckCircle2, Clock, X } from "lucide-react";
 import type { Shift, Staff, Violation } from "../hooks/use-schedule";

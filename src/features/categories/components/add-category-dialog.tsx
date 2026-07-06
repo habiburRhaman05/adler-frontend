@@ -71,6 +71,7 @@ export function AddCategoryDialog({ open, onOpenChange }: AddCategoryDialogProps
             <Switch
               checked={values.isActive}
               onCheckedChange={(c) => setValues((v) => ({ ...v, isActive: c }))}
+              className="data-[state=checked]:bg-violet-500 data-[state=unchecked]:bg-slate-300"
             />
           </div>
         </div>

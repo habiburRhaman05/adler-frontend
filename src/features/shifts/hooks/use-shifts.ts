@@ -78,7 +78,7 @@ export function useUpdateShift(): UseMutationResult<Shift, Error, { id: string; 
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ id, data }) => shiftService.update(id, data),
-    onSuccess: (res, { id }) => {
+    onSuccess: (_, { id }) => {
       qc.invalidateQueries({ queryKey: shiftKeys.lists() });
       qc.invalidateQueries({ queryKey: shiftKeys.detail(id) });
       toast.success('Shift updated successfully');
@@ -123,7 +123,7 @@ export function useApproveResponse(): UseMutationResult<{ data: { response: Volu
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ shiftId, responseId }) => shiftService.approveResponse(shiftId, responseId),
-    onSuccess: (res, { shiftId }) => {
+    onSuccess: (_, { shiftId }) => {
       qc.invalidateQueries({ queryKey: shiftKeys.responses(shiftId) });
       qc.invalidateQueries({ queryKey: shiftKeys.approvalsFeed() });
       toast.success('Response approved');
@@ -138,7 +138,7 @@ export function useRejectResponse(): UseMutationResult<{ data: { response: Volun
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ shiftId, responseId, note }) => shiftService.rejectResponse(shiftId, responseId, note),
-    onSuccess: (res, { shiftId }) => {
+    onSuccess: (_, { shiftId }) => {
       qc.invalidateQueries({ queryKey: shiftKeys.responses(shiftId) });
       qc.invalidateQueries({ queryKey: shiftKeys.approvalsFeed() });
       toast.success('Response rejected');

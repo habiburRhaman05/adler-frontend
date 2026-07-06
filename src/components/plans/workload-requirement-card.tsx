@@ -17,8 +17,7 @@ export function WorkloadRequirementCard({
   removing,
   onRemove,
 }: WorkloadRequirementCardProps) {
-  const pct = Math.min(100, (assigned / requirement.needed) * 100);
-  const short = assigned < requirement.needed;
+    const short = assigned < requirement.needed;
   const over = assigned > requirement.needed;
 
   return (

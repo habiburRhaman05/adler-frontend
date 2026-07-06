@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { CalendarRange, Loader2 } from "lucide-react";
+import { CalendarRange } from "lucide-react";
 import { useDB } from "@/lib/plan-data";
 import { CreatePlanDialog } from "@/components/plans/create-plan-dialog";
 import { PlanFiltersBar } from "@/components/plans/plan-filters-bar";

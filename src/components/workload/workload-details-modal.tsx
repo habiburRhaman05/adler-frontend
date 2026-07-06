@@ -1,9 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, Fragment } from "react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
@@ -147,7 +146,7 @@ export function WorkloadDetailsModal({ sheet, open, onOpenChange }: WorkloadDeta
                       const formattedDay = format(parseISO(day), "EEE, MMM d");
                       
                       return (
-                        <React.Fragment key={day}>
+                        <Fragment key={day}>
                           {dayEntries.map((entry, ei) => {
                             const shiftStart = format(parseISO(entry.startTime), "HH:mm");
                             const shiftEnd = format(parseISO(entry.endTime), "HH:mm");
@@ -202,7 +201,7 @@ export function WorkloadDetailsModal({ sheet, open, onOpenChange }: WorkloadDeta
                               </span>
                             </td>
                           </tr>
-                        </React.Fragment>
+                        </Fragment>
                       );
                     })}
                   </tbody>

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { apiClient } from '@/lib/api-client';
 import api from '@/lib/axios';
 import { buildQuery } from '@/types';
 

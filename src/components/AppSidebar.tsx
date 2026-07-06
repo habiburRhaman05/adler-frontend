@@ -32,7 +32,7 @@ import { useApprovals } from "@/features/approvals/hooks/use-approvals";
 const items = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
   { title: "Schedule planner", url: "/dashboard/schedule", icon: CalendarRange },
-  // { title: "Plans", url: "/dashboard/plans", icon: Layers },
+  // { title: "Plans", url: "/dashboard/plans", icon: Layers },\
   { title: "Demands", url: "/dashboard/demands", icon: ClipboardList },
   { title: "Employees", url: "/dashboard/employees", icon: Users },
   { title: "Categories", url: "/dashboard/categories", icon: Layers },
@@ -42,7 +42,7 @@ const items = [
     icon: ArrowLeftRight,
     approvalsBadge: true,
   },
-  { title: "Reports", url: "/dashboard/reports", icon: BarChart3 },
+  { title: "Reports & Payroll", url: "/dashboard/reports", icon: BarChart3 },
   { title: "Settings", url: "/dashboard/settings", icon: SettingsIcon },
 ];
 

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
-import { Loader2, AlertCircle, CheckCircle2, X } from "lucide-react";
+import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
@@ -134,7 +134,6 @@ export function AssignSlotSheet({
   open, 
   onOpenChange, 
   assignData, 
-  violations, 
   onAssign 
 }: { 
   open: boolean, 

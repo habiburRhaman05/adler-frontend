@@ -197,7 +197,7 @@ export const api = {
     const plan: Plan = { ...input, id: uid("plan"), slots: [], createdAt: Date.now() };
     
     // --- START MOCK DATA GENERATION ---
-    const newWorkload: WorkloadRequirement[] = db.categories.map((cat, i) => ({
+    const newWorkload: WorkloadRequirement[] = db.categories.map((cat) => ({
       id: uid("r"),
       categoryId: cat.id,
       label: `${cat.name} requirements`,

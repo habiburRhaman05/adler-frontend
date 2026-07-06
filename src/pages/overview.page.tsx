@@ -193,7 +193,7 @@ export function OverviewPage() {
         <PlanStatusCard loading={isLoading} plans={plans} />
         <PendingSwapsCard loading={isLoading} swaps={swaps} />
         <RecentStaffCard loading={isLoading} staff={staff} />
-        <SnapshotCard loading={isLoading} data={overviewData?.thisMonth} />
+        <SnapshotCard loading={isLoading} data={overviewData?.snapshot} />
       </div>
     </div>
   );

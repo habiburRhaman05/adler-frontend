@@ -97,6 +97,8 @@ export function EmployeeFormModal({
       setForm({
         ...DEFAULT_FORM,
         ...rest,
+        firstName: rest.firstName || "",
+        lastName: rest.lastName || "",
         // Password shouldn't be populated
         password: '',
         hireDate: rest.hireDate ? new Date(rest.hireDate).toISOString().split('T')[0] : '',

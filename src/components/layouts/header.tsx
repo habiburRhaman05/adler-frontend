@@ -1,7 +1,6 @@
-import { Bell, Search, AlignJustify, UtensilsCrossed } from 'lucide-react';
+import { Bell, AlignJustify, UtensilsCrossed } from 'lucide-react';
 
 import { useSidebar } from '@/components/ui/sidebar';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { UserDropdown } from './user-dropdown';
 

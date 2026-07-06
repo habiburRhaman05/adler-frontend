@@ -13,7 +13,7 @@ import {
   type Worker,
 } from "@/lib/plan-data";
 import { CheckCircle2, DollarSign, Loader2, ShieldAlert } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "sonner";
 

@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { addDays, parseISO } from "date-fns";
-import { CalendarDays, Settings2, Plus, Mail, DollarSign, Activity } from "lucide-react";
+import { CalendarDays, Settings2, DollarSign, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Shift, Staff } from "@/features/schedule/hooks/use-schedule";
 import { useSchedulePlanner, STAFF, FN_LABELS } from "@/features/schedule/hooks/use-schedule";
@@ -13,7 +13,6 @@ export function SchedulePage() {
   const [currentWeek] = useState(1);
   const { 
     state,
-    isLoading,
     isGenerating,
     generateSchedule, 
     approveSchedule, 
@@ -203,7 +202,7 @@ export function SchedulePage() {
       <GenerateScheduleModal 
         open={showGenerateModal} 
         onOpenChange={setShowGenerateModal} 
-        onGenerate={generateSchedule} 
+        onGenerate={async () => { await generateSchedule(); }} 
       />
       
       <AssignSlotSheet

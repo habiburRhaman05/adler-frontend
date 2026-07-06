@@ -62,6 +62,7 @@ export function EditCategoryDialog({ category, onClose }: EditCategoryDialogProp
             <Switch
               checked={form.isActive}
               onCheckedChange={(c) => setForm({ ...form, isActive: c })}
+              className="data-[state=checked]:bg-violet-500 data-[state=unchecked]:bg-slate-300"
             />
           </div>
         </div>

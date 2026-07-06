@@ -14,7 +14,6 @@ import { useCategoryTree } from "@/features/categories/hooks/use-categories";
 import { useReports } from "@/features/reports/hooks/use-reports";
 import { reportService } from "@/features/reports/api/report.service";
 import { initials } from "@/lib/utils";
-import { useAuthStore } from "@/stores/auth.store";
 
 export function ReportsPage() {
   const [categoryId, setCategoryId] = useState("all");
@@ -53,8 +52,7 @@ export function ReportsPage() {
       toast.error("Nothing to export");
       return;
     }
-    const token = document.cookie.split('; ').find(row => row.startsWith('accessToken='));
-    
+        
     // Instead of raw export logic, redirect to backend CSV endpoint
     // We open it in a new window to trigger the download directly.
     const url = reportService.getExportUrl(queryParams);

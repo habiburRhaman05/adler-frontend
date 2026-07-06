@@ -7,12 +7,10 @@ const delay: PromiseDelay = (data, ms = 600) =>
 
 // ─── Types ──────────────────────────────────────────────────
 export interface KpiData {
-  activeEmployees: number;
-  totalEmployees: number;
-  plansCount: number;
-  draftPlans: number;
-  pendingSwaps: number;
-  violations: number;
+  employees: { active: number; total: number };
+  shifts: { upcoming: number; draft: number };
+  swaps: { pending: number };
+  approvals: { pendingResponses: number };
 }
 
 export interface PlanSummary {
@@ -60,12 +58,10 @@ export interface OverviewData {
 
 // ─── Mock data ──────────────────────────────────────────────
 const mockKpis: KpiData = {
-  activeEmployees: 18,
-  totalEmployees: 24,
-  plansCount: 6,
-  draftPlans: 3,
-  pendingSwaps: 4,
-  violations: 2,
+  employees: { active: 18, total: 24 },
+  shifts: { upcoming: 6, draft: 3 },
+  swaps: { pending: 4 },
+  approvals: { pendingResponses: 2 },
 };
 
 const mockPlans: PlanSummary[] = [
@@ -101,7 +97,7 @@ const mockSnapshot: SnapshotData = {
 export const overviewService = {
 
   
-  async getOverviewData(): Promise<KpiData> {
+  async getOverviewData(): Promise<OverviewData> {
     return apiClient.get("/admin/overview");
   },
 

@@ -9,7 +9,6 @@ import {
   type WeekDetailResponse,
   type StaffingDemand,
   type CreateDemandInput,
-  type BulkCreateDemandInput,
   type WorkloadSortableViewFilters,
   type WorkloadSortableViewResponse
 } from '../api/workload.service';
@@ -69,7 +68,7 @@ export function useUpdateWeek(): UseMutationResult<{ data: { week: WorkloadWeek 
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ planId, data }) => workloadService.updateWeek(planId, data),
-    onSuccess: (res, { planId }) => {
+    onSuccess: (_, { planId }) => {
       qc.invalidateQueries({ queryKey: workloadKeys.weeks() });
       qc.invalidateQueries({ queryKey: workloadKeys.weekDetail(planId) });
       toast.success('Week updated');
@@ -82,7 +81,7 @@ export function usePublishWeek(): UseMutationResult<{ data: { week: WorkloadWeek
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (planId: string) => workloadService.publishWeek(planId),
-    onSuccess: (res, planId) => {
+    onSuccess: (_, planId) => {
       qc.invalidateQueries({ queryKey: workloadKeys.weeks() });
       qc.invalidateQueries({ queryKey: workloadKeys.weekDetail(planId) });
       toast.success('Workload published successfully!');
@@ -107,7 +106,7 @@ export function useAddDemand(): UseMutationResult<{ data: { demand: StaffingDema
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ planId, data }) => workloadService.addDemand(planId, data),
-    onSuccess: (res, { planId }) => {
+    onSuccess: (_, { planId }) => {
       qc.invalidateQueries({ queryKey: workloadKeys.weekDetail(planId) });
       qc.invalidateQueries({ queryKey: workloadKeys.views() });
       toast.success('Demand added');
@@ -134,7 +133,7 @@ export function useUpdateDemand(): UseMutationResult<{ data: { demand: StaffingD
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ demandId, data }) => workloadService.updateDemand(demandId, data),
-    onSuccess: (res, { planId }) => {
+    onSuccess: (_, { planId }) => {
       qc.invalidateQueries({ queryKey: workloadKeys.weekDetail(planId) });
       qc.invalidateQueries({ queryKey: workloadKeys.views() });
       toast.success('Demand updated');
@@ -147,7 +146,7 @@ export function useDeleteDemand(): UseMutationResult<{ message: string }, Error,
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ demandId }) => workloadService.deleteDemand(demandId),
-    onSuccess: (res, { planId }) => {
+    onSuccess: (_, { planId }) => {
       qc.invalidateQueries({ queryKey: workloadKeys.weekDetail(planId) });
       qc.invalidateQueries({ queryKey: workloadKeys.views() });
       toast.success('Demand deleted');
