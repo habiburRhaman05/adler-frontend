@@ -118,7 +118,6 @@ import { useAuthStore } from '@/stores/auth.store';
 import { overviewService } from '@/features/overview/api/overview.service';
 import {
   KpiCard,
-  PlanStatusCard,
   PendingSwapsCard,
   RecentStaffCard,
   SnapshotCard,
@@ -147,7 +146,6 @@ export function OverviewPage() {
   });
 
   const kpis = overviewData?.kpis;
-  const plans = overviewData?.plans ?? [];
   const swaps = overviewData?.swaps ?? [];
   const staff = overviewData?.staff ?? [];
 
@@ -189,11 +187,16 @@ export function OverviewPage() {
       </div>
 
       {/* ── Main Content Grid ── */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        <PlanStatusCard loading={isLoading} plans={plans} />
-        <PendingSwapsCard loading={isLoading} swaps={swaps} />
-        <RecentStaffCard loading={isLoading} staff={staff} />
-        <SnapshotCard loading={isLoading} data={overviewData?.snapshot} />
+      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid cols-span-12 gap-6 lg:grid-cols-2">
+ 
+  <RecentStaffCard loading={isLoading} staff={staff} />
+ <PendingSwapsCard loading={isLoading} swaps={swaps} />
+
+</div>
+        <div className="lg:col-span-2">
+          <SnapshotCard loading={isLoading} data={overviewData?.snapshot} />
+        </div>
       </div>
     </div>
   );
