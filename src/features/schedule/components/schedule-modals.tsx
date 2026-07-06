@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { format } from "date-fns";
 import { Loader2, AlertCircle, CheckCircle2, X } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
@@ -161,21 +162,21 @@ export function AssignSlotSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="sm:max-w-md overflow-y-auto">
-        <SheetHeader className="mb-6">
-          <SheetTitle>Assign Staff to Shift</SheetTitle>
-          <SheetDescription>
+      <SheetContent className="sm:max-w-md overflow-y-auto bg-white border-l border-slate-200 shadow-2xl z-50">
+        <SheetHeader className="mb-6 pb-4 border-b border-slate-100">
+          <SheetTitle className="text-xl font-bold text-slate-900">Assign Staff to Shift</SheetTitle>
+          <SheetDescription className="text-sm text-slate-500">
             {assignData.needLabel ? `Fill: ${assignData.needLabel}` : `Add a new ${FN_LABELS[fnKey]} shift for Day ${assignData.dayIdx + 1}`}
           </SheetDescription>
         </SheetHeader>
         
-        <div className="space-y-6">
+        <div className="space-y-8">
           
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Compensation for exceptions</h4>
-            <p className="text-xs text-slate-500">If you assign an employee who exceeds their hours, how should it be handled?</p>
+          <div className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
+            <h4 className="text-sm font-bold text-slate-800">Compensation for exceptions</h4>
+            <p className="text-xs text-slate-500 mb-2">If you assign an employee who exceeds their hours, how should it be handled?</p>
             <Select value={compensationOption} onValueChange={(v: any) => setCompensationOption(v)}>
-              <SelectTrigger>
+              <SelectTrigger className="bg-white">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -185,28 +186,36 @@ export function AssignSlotSheet({
             </Select>
           </div>
 
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Candidates ({FN_LABELS[fnKey]})</h4>
-            <p className="text-xs text-slate-500 mb-2">Only qualified staff are shown. The rule check runs before you assign.</p>
-            {cands.map(c => (
-              <div key={c.n} className={`p-3 rounded-xl border flex flex-col gap-2 ${c.ok ? "bg-white border-slate-200" : "bg-slate-50 border-slate-200 border-l-4 border-l-orange-400"}`}>
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs shrink-0">
-                    {c.n.split(" ").map(n => n[0]).join("")}
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-sm font-bold text-slate-800 flex items-center justify-between">
+                Candidates ({FN_LABELS[fnKey]})
+                <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">{cands.length} available</span>
+              </h4>
+              <p className="text-xs text-slate-500 mt-1 mb-4">Only qualified staff are shown. The rule check runs before you assign.</p>
+            </div>
+            
+            <div className="space-y-3">
+              {cands.map(c => (
+                <div key={c.n} className={`p-4 rounded-xl border transition-all hover:shadow-md flex flex-col gap-3 ${c.ok ? "bg-white border-slate-200 hover:border-slate-300" : "bg-orange-50/30 border-orange-200 hover:border-orange-300 border-l-4 border-l-orange-400"}`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`h-10 w-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${c.ok ? "bg-blue-100 text-blue-700" : "bg-orange-100 text-orange-700"}`}>
+                      {c.n.split(" ").map(n => n[0]).join("")}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-sm truncate text-slate-900">{c.n}</div>
+                      <div className={`text-xs font-medium mt-0.5 ${c.ok ? "text-emerald-600" : "text-orange-600"}`}>{c.r}</div>
+                    </div>
+                    <Button size="sm" onClick={() => { 
+                      onAssign(assignData.violId, c.n, assignData.dayIdx, fnKey, "17:00–23:30", compensationOption); 
+                      onOpenChange(false); 
+                    }} className={`shrink-0 shadow-sm ${c.ok ? "bg-slate-900 hover:bg-slate-800 text-white" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50"}`}>
+                      {c.ok ? "Assign" : "Force Assign"}
+                    </Button>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-sm truncate text-slate-900">{c.n}</div>
-                  </div>
-                  <Button size="sm" onClick={() => { 
-                    onAssign(assignData.violId, c.n, assignData.dayIdx, fnKey, "17:00–23:30", compensationOption); 
-                    onOpenChange(false); 
-                  }} className="shrink-0" variant={c.ok ? "default" : "secondary"}>
-                    {c.ok ? "Assign" : "Force Assign"}
-                  </Button>
                 </div>
-                <div className={`text-[11px] font-medium leading-tight ml-11 ${c.ok ? "text-emerald-600" : "text-orange-600"}`}>{c.r}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </SheetContent>
@@ -313,6 +322,62 @@ export function ShiftInfoModal({
           <Button variant="destructive" onClick={() => { onRemove(staff.id, dayIdx, shift.id); onOpenChange(false); }} className="w-full sm:w-auto">
             Remove Shift
           </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+export function ViewDemandModal({ 
+  open, 
+  onOpenChange, 
+  demands, 
+  days 
+}: { 
+  open: boolean, 
+  onOpenChange: (open: boolean) => void, 
+  demands: DailyDemand[],
+  days: Date[]
+}) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-4xl max-h-[80vh] flex flex-col">
+        <DialogHeader>
+          <DialogTitle>Week Demand Plan</DialogTitle>
+        </DialogHeader>
+        <div className="py-4 overflow-auto flex-1">
+          <div className="rounded-xl border border-slate-200 overflow-hidden">
+            <table className="w-full text-sm text-left">
+              <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                <tr>
+                  <th className="px-4 py-3 font-semibold bg-slate-50 border-r border-slate-200">Role</th>
+                  {days.map((day, i) => (
+                    <th key={i} className="px-3 py-3 font-semibold text-center border-r border-slate-200 last:border-0">
+                      {format(day, "EEE, MMM d")}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200">
+                {Object.entries(FN_LABELS).map(([fnKey, label]) => (
+                  <tr key={fnKey} className="hover:bg-slate-50/50">
+                    <td className="px-4 py-3 font-semibold text-slate-900 border-r border-slate-200">{label}</td>
+                    {demands.map((demand, di) => {
+                      const count = demand[fnKey as keyof DailyDemand] || 0;
+                      return (
+                        <td key={di} className="px-3 py-3 text-center font-mono font-medium border-r border-slate-200 last:border-0">
+                          {count > 0 ? count : <span className="text-slate-300">-</span>}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <DialogFooter>
+          <Button onClick={() => onOpenChange(false)} className="bg-slate-900 text-white hover:bg-slate-800">Close</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

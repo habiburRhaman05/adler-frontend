@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { Shift, Staff } from "@/features/schedule/hooks/use-schedule";
 import { useSchedulePlanner, STAFF, FN_LABELS } from "@/features/schedule/hooks/use-schedule";
 import { ScheduleGrid } from "@/features/schedule/components/schedule-grid";
-import { GenerateScheduleModal, ViolationsPanel, AssignSlotSheet, ShiftInfoModal } from "@/features/schedule/components/schedule-modals";
+import { GenerateScheduleModal, ViolationsPanel, AssignSlotSheet, ShiftInfoModal, ViewDemandModal } from "@/features/schedule/components/schedule-modals";
 import { toast } from "sonner";
 
 export function SchedulePage() {
@@ -30,6 +30,7 @@ export function SchedulePage() {
 
   // Modals state
   const [showGenerateModal, setShowGenerateModal] = useState(false);
+  const [showDemandModal, setShowDemandModal] = useState(false);
   const [assignData, setAssignData] = useState<{ violId: string | null, dayIdx: number, fnKey?: string, needLabel?: string } | null>(null);
   const [selectedShift, setSelectedShift] = useState<{ staff: Staff, dayIdx: number, shift: Shift } | null>(null);
 
@@ -60,7 +61,7 @@ export function SchedulePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 p-8 font-sans pb-24">
-      <div className="max-w-[1400px] mx-auto space-y-6">
+      <div className="w-full mx-auto space-y-6">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -159,6 +160,13 @@ export function SchedulePage() {
                   );
                 })}
               </div>
+
+              {/* View Demand Button */}
+              <div className="shrink-0 ml-auto pl-4 border-l border-slate-200 h-10 flex items-center">
+                <Button variant="outline" size="sm" onClick={() => setShowDemandModal(true)} className="text-xs font-semibold h-8 bg-white hover:bg-slate-50 text-slate-700">
+                  View Demand
+                </Button>
+              </div>
             </div>
 
             <ScheduleGrid 
@@ -215,6 +223,15 @@ export function SchedulePage() {
         onEditTime={(staffId, dayIdx, shiftId, newTm) => editShiftTime({ staffId, dayIdx, shiftId, newTm })}
         onApplyFix={applyFix}
       />
+
+      {state?.demands && (
+        <ViewDemandModal
+          open={showDemandModal}
+          onOpenChange={setShowDemandModal}
+          demands={state.demands}
+          days={days}
+        />
+      )}
     </div>
   );
 }
