@@ -32,6 +32,7 @@ import { useApprovals } from "@/features/approvals/hooks/use-approvals";
 const items = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
   { title: "Weekly Plan", url: "/dashboard/plans", icon: CalendarRange },
+  { title: "Demands", url: "/dashboard/demands", icon: ClipboardList },
   { title: "Employees", url: "/dashboard/employees", icon: Users },
   // { title: "Workload", url: "/dashboard/workload", icon: ClipboardList },
   { title: "Categories", url: "/dashboard/categories", icon: Layers },

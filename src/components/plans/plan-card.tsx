@@ -42,8 +42,6 @@ return (
           <h3 className="mt-3 truncate text-lg font-bold text-black">
             {plan.name}
           </h3>
-
-       
         </div>
 
         <button
